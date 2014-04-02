@@ -1,3 +1,4 @@
+package banque;
 public class compte_courant extends compte
 {
 	private double decouvertAutorise;

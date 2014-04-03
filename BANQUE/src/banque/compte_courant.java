@@ -1,7 +1,7 @@
 package banque;
 public class compte_courant extends compte
 {
-	private double decouvertAutorise;
+	private double decouvertAutorise, soldeBIS;
 	
 	// Constructeur
 	public compte_courant(int no, String nm, double s, double d)
@@ -13,12 +13,16 @@ public class compte_courant extends compte
 	
 	public void consulte()
 	{
-		// Je consulte
+		// Je consulte.
 	}
 	
-	public double deposer(double val)
+	// Procédure de dépôt d'argent sur le compte épargne.
+	public void deposer(double val)
 	{
-		// Je dépose
+		soldeBIS = super.getSolde() + val;
+		System.out.println("Vous avez déposé : " + val + " euros sur votre compte.");
+		System.out.println("Vous avez donc maintenant " + soldeBIS + " euros sur votre compte.");
+		super.setSolde(soldeBIS);
 	}
 	
 	public double retirer(double val)

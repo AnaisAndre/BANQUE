@@ -1,14 +1,14 @@
 package banque;
 public class compte_epargne extends compte
 {
-	private double taux;
+	private double taux, soldeBIS;
 	
 	// Constructeur
 		public compte_epargne(int no, String nm, double s, double t)
 		{
 			// Appel au constructeur de la classe mère (compte)
 			super(no, nm, s);
-			taux = t;		
+			taux = t;
 		}
 		
 		public void consulte()
@@ -16,9 +16,13 @@ public class compte_epargne extends compte
 			// Je consulte
 		}
 		
-		public double deposer(double val)
+		// Procédure de dépôt d'argent sur le compte épargne.
+		public void deposer(double val)
 		{
-			// Je dépose
+			soldeBIS = super.getSolde() + val;
+			System.out.println("Vous avez déposé : " + val + " euros sur votre compte.");
+			System.out.println("Vous avez donc maintenant " + soldeBIS + " euros sur votre compte.");
+			super.setSolde(soldeBIS);
 		}
 		
 		public double retirer(double val)

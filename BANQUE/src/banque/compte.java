@@ -27,19 +27,28 @@ public class compte
 		System.out.println("Vous avez donc maintenant " + solde + "euros sur votre compte.");
 		//return solde;	
 	}
-	
-	public double retirer(double val)
+	// Procédure de retrait d'argent sur le compte en banque.
+	public void retirer(double val)
 	{
-		// Je retire
 		solde = solde - val;
 		System.out.println("Vous avez fait un retrait de " + val + " euros.");
 		System.out.println("Vous disposez désormais de " + solde + " euros sur votre compte.");
-		return solde;
+		//return solde;
 	}
 	
 	public double getSolde()
 	{
 		return solde;
+	}
+	
+	public double getNum()
+	{
+		return numero;
+	}
+	
+	public String getNom()
+	{
+		return nomTitulaire;
 	}
 	
 	public void setSolde(double newSolde)

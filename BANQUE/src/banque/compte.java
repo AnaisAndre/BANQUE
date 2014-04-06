@@ -3,7 +3,7 @@ public class compte
 {
 	private int numero;
 	private String nomTitulaire;
-	private double solde, sol;
+	private double solde;
 	
 	// Constructeur
 	public compte(int no, String nm, double s)
@@ -25,7 +25,6 @@ public class compte
 		solde = solde + val;
 		System.out.println("Vous avez déposé : " + val + " euros sur votre compte.");
 		System.out.println("Vous avez donc maintenant " + solde + "euros sur votre compte.");
-		//return solde;	
 	}
 	// Procédure de retrait d'argent sur le compte en banque.
 	public void retirer(double val)
@@ -33,7 +32,6 @@ public class compte
 		solde = solde - val;
 		System.out.println("Vous avez fait un retrait de " + val + " euros.");
 		System.out.println("Vous disposez désormais de " + solde + " euros sur votre compte.");
-		//return solde;
 	}
 	
 	public double getSolde()

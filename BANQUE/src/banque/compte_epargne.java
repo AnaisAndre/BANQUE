@@ -14,10 +14,11 @@ public class compte_epargne extends compte
 		taux = t;
 	}
 	
+	// Consultation du solde du compte et du taux.
 	public void consulte()
 	{
-		// Je consulte
 		System.out.println("Bonjour " + super.getNom() + ", votre compte numéro : " + super.getNum() + " à un solde de : " + super.getSolde());
+		System.out.println("Vous disposez d'un taux de : " + taux + " %.");
 	}
 	
 	// Procédure de dépôt d'argent sur le compte épargne.

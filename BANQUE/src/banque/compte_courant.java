@@ -11,12 +11,14 @@ public class compte_courant extends compte
 		decouvertAutorise = d;		
 	}
 	
+	// Consultation du solde du compte et du taux.
 	public void consulte()
 	{
-		// Je consulte.
+		System.out.println("Bonjour " + super.getNom() + ", votre compte numéro : " + super.getNum() + " à un solde de : " + super.getSolde());
+		System.out.println("Vous disposez d'une autorisation de découvert de : " + decouvertAutorise + " euros.");
 	}
 	
-	// Procédure de dépôt d'argent sur le compte épargne.
+	// Procédure de dépôt d'argent sur le compte courant.
 	public void deposer(double val)
 	{
 		soldeBIS = super.getSolde() + val;
@@ -25,8 +27,12 @@ public class compte_courant extends compte
 		super.setSolde(soldeBIS);
 	}
 	
-	public double retirer(double val)
+	// Procédure de retrait d'argent sur le compte courant.
+	public void retirer(double val)
 	{
-		// Je retire
+		soldeBIS = super.getSolde() - val;
+		System.out.println("Vous avez retiré : " + val + " euros de votre compte.");
+		System.out.println("Vous avez donc maintenant " + soldeBIS + " euros sur votre compte.");
+		super.setSolde(soldeBIS);
 	}
 }

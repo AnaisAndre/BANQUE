@@ -3,23 +3,38 @@ package banque;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.GridBagLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.Scanner;
 
-public class Banquier {
-
+public class Banquier
+{
+	Scanner saisie = new Scanner(System.in);
+	int rep, numC;
+	String nomT;
+	double soldeBis;
+	
 	private JFrame frmBanquier;
 
 	/**
@@ -69,6 +84,21 @@ public class Banquier {
 		frmBanquier.getContentPane().add(panel_2);
 		
 		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
+		btnCrerUnNouveau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("Numéro du compte : ");
+				numC = saisie.nextInt();
+				System.out.println("Nom du titulaire : ");
+				nomT = saisie.next();
+				System.out.println("Solde de départ : ");
+				soldeBis = saisie.nextDouble();
+				
+				compte unCompte = new compte(numC,nomT,soldeBis);
+				
+				unCompte.consulte();
+			}
+		});
 		panel_2.add(btnCrerUnNouveau);
 		btnCrerUnNouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnCrerUnNouveau.setHorizontalTextPosition(SwingConstants.CENTER);

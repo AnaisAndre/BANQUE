@@ -85,18 +85,24 @@ public class Banquier
 		
 		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
 		btnCrerUnNouveau.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				System.out.println("Numéro du compte : ");
-				numC = saisie.nextInt();
-				System.out.println("Nom du titulaire : ");
-				nomT = saisie.next();
-				System.out.println("Solde de départ : ");
-				soldeBis = saisie.nextDouble();
+			public void actionPerformed(ActionEvent arg0) {
+				Scanner saisie = new Scanner(System.in);
+				String nomTitulaire;
+				int numCompte;
+				double soldeCompte, decouvert;
 				
-				compte unCompte = new compte(numC,nomT,soldeBis);
+				System.out.println("Saisir le nom du titulaire");
+				nomTitulaire = saisie.next();
+				System.out.println("Attribuer un numéro de compte");
+				numCompte = saisie.nextInt();
+				System.out.println("Quel est son solde ?");
+				soldeCompte = saisie.nextDouble();
+				System.out.println("Montant du découvert autoriser?");
+				decouvert = saisie.nextDouble();
 				
-				unCompte.consulte();
+				compte_courant compte = new compte_courant(numCompte, nomTitulaire,soldeCompte, decouvert);
+				
+				compte.consulte();
 			}
 		});
 		panel_2.add(btnCrerUnNouveau);

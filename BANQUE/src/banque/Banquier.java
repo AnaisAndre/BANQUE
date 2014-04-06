@@ -16,8 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 
-public class test {
+public class Banquier {
 
 	private JFrame frame;
 
@@ -28,7 +29,7 @@ public class test {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					test window = new test();
+					Banquier window = new Banquier();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +41,7 @@ public class test {
 	/**
 	 * Create the application.
 	 */
-	public test() {
+	public Banquier() {
 		initialize();
 	}
 
@@ -53,38 +54,50 @@ public class test {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridLayout(6, 0, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2);
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1);
 		
 		JLabel lblChoisissezCeQue = new JLabel("Choisissez ce que vous d\u00E9sirez effectuer comme action :");
+		panel_1.add(lblChoisissezCeQue);
 		lblChoisissezCeQue.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblChoisissezCeQue.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblChoisissezCeQue.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblChoisissezCeQue.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblChoisissezCeQue);
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1);
+		JPanel panel_2 = new JPanel();
+		frame.getContentPane().add(panel_2);
 		
 		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
-		panel_1.add(btnCrerUnNouveau);
+		panel_2.add(btnCrerUnNouveau);
+		btnCrerUnNouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnCrerUnNouveau.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		JPanel panel_3 = new JPanel();
 		frame.getContentPane().add(panel_3);
 		
 		JButton btnConsulterUnCompte = new JButton("Consulter les comptes ayant un solde n\u00E9gatif");
+		btnConsulterUnCompte.setHorizontalTextPosition(SwingConstants.CENTER);
 		panel_3.add(btnConsulterUnCompte);
 		
 		JPanel panel_4 = new JPanel();
 		frame.getContentPane().add(panel_4);
 		
 		JButton btnModifierLeTaux = new JButton("Modifier le taux de r\u00E9mun\u00E9ration des comptes \u00E9pargne");
+		btnModifierLeTaux.setHorizontalTextPosition(SwingConstants.CENTER);
 		panel_4.add(btnModifierLeTaux);
 		
 		JPanel panel_5 = new JPanel();
 		frame.getContentPane().add(panel_5);
 		
-		JPanel panel = new JPanel();
+		JButton btnAfficherLaListe = new JButton("Afficher la liste des titulaires d'un compte \u00E9pargne et d'un compte courant");
+		btnAfficherLaListe.setHorizontalTextPosition(SwingConstants.CENTER);
+		panel_5.add(btnAfficherLaListe);
+		
+		JPanel panel_6 = new JPanel();
+		frame.getContentPane().add(panel_6);
+		
+		JButton btnModifierLeMontant = new JButton("Modifier le montant du d\u00E9couvert autoris\u00E9");
+		panel_6.add(btnModifierLeMontant);
 	}
 
 }

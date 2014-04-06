@@ -3,20 +3,30 @@ package banque;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.GridBagLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.Scanner;
 
 public class Banquier {
 
@@ -69,6 +79,27 @@ public class Banquier {
 		frmBanquier.getContentPane().add(panel_2);
 		
 		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
+		btnCrerUnNouveau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Scanner saisie = new Scanner(System.in);
+				String nomTitulaire;
+				int numCompte;
+				double soldeCompte, decouvert;
+				
+				System.out.println("Saisir le nom du titulaire");
+				nomTitulaire = saisie.next();
+				System.out.println("Attribuer un numéro de compte");
+				numCompte = saisie.nextInt();
+				System.out.println("Quel est son solde ?");
+				soldeCompte = saisie.nextDouble();
+				System.out.println("Montant du découvert autoriser?");
+				decouvert = saisie.nextDouble();
+				
+				compte_courant compte = new compte_courant(numCompte, nomTitulaire,soldeCompte, decouvert);
+				
+				compte.consulte();
+			}
+		});
 		panel_2.add(btnCrerUnNouveau);
 		btnCrerUnNouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnCrerUnNouveau.setHorizontalTextPosition(SwingConstants.CENTER);

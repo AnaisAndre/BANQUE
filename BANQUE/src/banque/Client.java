@@ -39,6 +39,7 @@ public class Client {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		System.out.println("JE TESTE GIT !!!");
 		frmInterfaceClient = new JFrame();
 		frmInterfaceClient.setTitle("Interface client");
 		frmInterfaceClient.setBounds(100, 100, 450, 300);

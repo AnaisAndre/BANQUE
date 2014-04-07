@@ -40,10 +40,14 @@ public class Banquier
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					Banquier window = new Banquier();
 					window.frmBanquier.setVisible(true);
 				} catch (Exception e) {
@@ -56,14 +60,16 @@ public class Banquier
 	/**
 	 * Create the application.
 	 */
-	public Banquier() {
+	public Banquier()
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		frmBanquier = new JFrame();
 		frmBanquier.setTitle("Interface banquier");
 		frmBanquier.setBounds(100, 100, 450, 300);
@@ -85,7 +91,8 @@ public class Banquier
 		
 		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
 		btnCrerUnNouveau.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0)
+			{
 				Scanner saisie = new Scanner(System.in);
 				String nomTitulaire;
 				int numCompte;
@@ -97,10 +104,10 @@ public class Banquier
 				numCompte = saisie.nextInt();
 				System.out.println("Quel est son solde ?");
 				soldeCompte = saisie.nextDouble();
-				System.out.println("Montant du découvert autoriser?");
+				System.out.println("Montant du découvert autorisé ?");
 				decouvert = saisie.nextDouble();
 				
-				compte_courant compte = new compte_courant(numCompte, nomTitulaire,soldeCompte, decouvert);
+				compte_courant compte = new compte_courant(numCompte, nomTitulaire, soldeCompte, decouvert);
 				
 				compte.consulte();
 			}

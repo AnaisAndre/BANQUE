@@ -1,147 +1,68 @@
 package banque;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
-import java.awt.GridBagLayout;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-
-import java.awt.GridLayout;
-
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
+import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
+import java.awt.GridBagConstraints;
+import javax.swing.JPopupMenu;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.Scanner;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Insets;
+import javax.swing.JTextField;
 
-public class Banquier
+public class Banquier extends JPanel 
 {
-	Scanner saisie = new Scanner(System.in);
-	int rep, numC;
-	String nomT;
-	double soldeBis;
-	
-	private JFrame frmBanquier;
+	private JTextField textField;
 
 	/**
-	 * Launch the application.
+	 * Create the panel.
 	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					Banquier window = new Banquier();
-					window.frmBanquier.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+	public Banquier() {
+		setBackground(Color.WHITE);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] {150, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JLabel lblNom = new JLabel("NOM ");
+		GridBagConstraints gbc_lblNom = new GridBagConstraints();
+		gbc_lblNom.anchor = GridBagConstraints.EAST;
+		gbc_lblNom.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNom.gridx = 0;
+		gbc_lblNom.gridy = 1;
+		add(lblNom, gbc_lblNom);
+		
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.anchor = GridBagConstraints.WEST;
+		gbc_textField.insets = new Insets(0, 0, 5, 5);
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 1;
+		add(textField, gbc_textField);
+		textField.setColumns(10);
+
+	}
+
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
 				}
 			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Banquier()
-	{
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize()
-	{
-		frmBanquier = new JFrame();
-		frmBanquier.setTitle("Interface banquier");
-		frmBanquier.setBounds(100, 100, 450, 300);
-		frmBanquier.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBanquier.getContentPane().setLayout(new GridLayout(6, 0, 0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		frmBanquier.getContentPane().add(panel_1);
-		
-		JLabel lblChoisissezCeQue = new JLabel("Choisissez ce que vous d\u00E9sirez effectuer comme action :");
-		panel_1.add(lblChoisissezCeQue);
-		lblChoisissezCeQue.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblChoisissezCeQue.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblChoisissezCeQue.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblChoisissezCeQue.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JPanel panel_2 = new JPanel();
-		frmBanquier.getContentPane().add(panel_2);
-		
-		JButton btnCrerUnNouveau = new JButton("Cr\u00E9er un nouveau compte banquaire");
-		btnCrerUnNouveau.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				Scanner saisie = new Scanner(System.in);
-				String nomTitulaire;
-				int numCompte;
-				double soldeCompte, decouvert;
-				
-				System.out.println("Saisir le nom du titulaire");
-				nomTitulaire = saisie.next();
-				System.out.println("Attribuer un numéro de compte");
-				numCompte = saisie.nextInt();
-				System.out.println("Quel est son solde ?");
-				soldeCompte = saisie.nextDouble();
-				System.out.println("Montant du découvert autorisé ?");
-				decouvert = saisie.nextDouble();
-				
-				compte_courant compte = new compte_courant(numCompte, nomTitulaire, soldeCompte, decouvert);
-				
-				compte.consulte();
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
-		panel_2.add(btnCrerUnNouveau);
-		btnCrerUnNouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnCrerUnNouveau.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		JPanel panel_3 = new JPanel();
-		frmBanquier.getContentPane().add(panel_3);
-		
-		JButton btnConsulterUnCompte = new JButton("Consulter les comptes ayant un solde n\u00E9gatif");
-		btnConsulterUnCompte.setHorizontalTextPosition(SwingConstants.CENTER);
-		panel_3.add(btnConsulterUnCompte);
-		
-		JPanel panel_4 = new JPanel();
-		frmBanquier.getContentPane().add(panel_4);
-		
-		JButton btnModifierLeTaux = new JButton("Modifier le taux de r\u00E9mun\u00E9ration des comptes \u00E9pargne");
-		btnModifierLeTaux.setHorizontalTextPosition(SwingConstants.CENTER);
-		panel_4.add(btnModifierLeTaux);
-		
-		JPanel panel_5 = new JPanel();
-		frmBanquier.getContentPane().add(panel_5);
-		
-		JButton btnAfficherLaListe = new JButton("Afficher la liste des titulaires d'un compte \u00E9pargne et d'un compte courant");
-		btnAfficherLaListe.setHorizontalTextPosition(SwingConstants.CENTER);
-		panel_5.add(btnAfficherLaListe);
-		
-		JPanel panel_6 = new JPanel();
-		frmBanquier.getContentPane().add(panel_6);
-		
-		JButton btnModifierLeMontant = new JButton("Modifier le montant du d\u00E9couvert autoris\u00E9");
-		panel_6.add(btnModifierLeMontant);
 	}
-
 }

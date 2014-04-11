@@ -106,7 +106,8 @@ public class Banquier extends JPanel
 		btnCrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				
+				String name = textField.getText();
+				System.out.println("JE SUIS LE NAME : " + name);
 			}
 		});
 		GridBagConstraints gbc_btnCrer = new GridBagConstraints();

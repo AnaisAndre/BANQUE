@@ -42,7 +42,7 @@ public class Banque
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 410);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -61,6 +61,14 @@ public class Banque
 		menuBar.add(mntmBanquier);
 		
 		JMenuItem mntmClient = new JMenuItem("Client");
+		mntmClient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				Client PCreaPanel = new Client();
+				frame.setContentPane(PCreaPanel);
+				frame.setVisible(true);
+			}
+		});
 		menuBar.add(mntmClient);
 		
 		JMenuItem mntmQuitter = new JMenuItem("Quitter");

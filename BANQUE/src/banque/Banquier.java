@@ -106,8 +106,22 @@ public class Banquier extends JPanel
 		btnCrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
+				// Récupération des valeurs des textField
 				String name = textField.getText();
 				System.out.println("JE SUIS LE NAME : " + name);
+				
+				String tempo = textField_1.getText();
+				int numCom = Integer.parseInt(tempo);
+				System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
+				
+				tempo = textField_2.getText();
+				double numSol = Double.parseDouble(tempo);
+				System.out.println("JE SUIS LE SOLDE : " + numSol);
+				
+				// Remise à zéro des textField.
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText("");
 			}
 		});
 		GridBagConstraints gbc_btnCrer = new GridBagConstraints();

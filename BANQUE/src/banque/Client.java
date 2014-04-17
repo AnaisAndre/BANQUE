@@ -1,18 +1,28 @@
 package banque;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Client extends JPanel
 {
@@ -24,6 +34,9 @@ public class Client extends JPanel
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	compte monCompte = new compte();
+	compte_epargne monCompteEp = new compte_epargne();
+	compte_courant monCompteCo = new compte_courant();
 	/**
 	 * Create the panel.
 	 */
@@ -64,6 +77,12 @@ public class Client extends JPanel
 		textField.setColumns(10);
 		
 		JButton btnAfficherLeSolde = new JButton("Afficher le solde");
+		btnAfficherLeSolde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				
+			}
+		});
 		GridBagConstraints gbc_btnAfficherLeSolde = new GridBagConstraints();
 		gbc_btnAfficherLeSolde.anchor = GridBagConstraints.WEST;
 		gbc_btnAfficherLeSolde.insets = new Insets(0, 0, 5, 0);

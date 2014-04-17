@@ -5,6 +5,15 @@ public class compte
 	private String nomTitulaire;
 	private double solde;
 	
+	
+	// Constructeur par défaut
+	public compte()
+	{
+		numero = 0;
+		nomTitulaire = "";
+		solde = 0;
+	}
+	
 	// Constructeur
 	public compte(int no, String nm, double s)
 	{

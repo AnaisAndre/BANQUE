@@ -3,6 +3,14 @@ public class compte_courant extends compte
 {
 	private double decouvertAutorise, soldeBIS;
 	
+	// Constructeur par défaut
+		public compte_courant()
+		{
+			// Appel au constructeur de la classe mère (compte)
+			super();
+			decouvertAutorise = 0;		
+		}
+	
 	// Constructeur
 	public compte_courant(int no, String nm, double s, double d)
 	{
@@ -34,5 +42,10 @@ public class compte_courant extends compte
 		System.out.println("Vous avez retiré : " + val + " euros de votre compte.");
 		System.out.println("Vous avez donc maintenant " + soldeBIS + " euros sur votre compte.");
 		super.setSolde(soldeBIS);
+	}
+	
+	public void mise_a_jour(double val)
+	{
+		decouvertAutorise = val;
 	}
 }

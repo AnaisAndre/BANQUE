@@ -6,6 +6,14 @@ public class compte_epargne extends compte
 	Scanner saisie = new Scanner(System.in);
 	private double taux, soldeBIS;
 	
+	// Constructeur par defaut
+	public compte_epargne()
+	{
+		// Appel au constructeur de la classe mère (compte)
+		super();
+		taux = 0;
+	}
+	
 	// Constructeur
 	public compte_epargne(int no, String nm, double s, double t)
 	{
@@ -41,9 +49,8 @@ public class compte_epargne extends compte
 	}
 	
 	// Modification du taux ?????
-	public void mise_a_jour()
+	public void mise_a_jour(double val)
 	{
-		System.out.println("Quel est le nouveau taux ?");
-		taux = saisie.nextDouble();
+		taux = val;
 	}
 }

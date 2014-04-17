@@ -26,16 +26,19 @@ import javax.swing.ButtonGroup;
 
 public class Banquier extends JPanel 
 {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textFieldNom;
+	private JTextField textFieldNum1;
+	private JTextField textFieldSoldeI;
+	private JTextField textFieldNouvTx;
+	private JTextField textFieldNum2;
+	private JTextField textFieldNum3;
+	private JTextField textFieldNouvDe;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField textFieldTxRem;
+	private JTextField textFieldDecouAut;
+	compte monCompte = new compte();
+	compte_epargne monCompteEp = new compte_epargne();
+	compte_courant monCompteCo = new compte_courant();
 
 	/**
 	 * Create the panel.
@@ -66,14 +69,14 @@ public class Banquier extends JPanel
 		gbc_lblNom.gridy = 1;
 		add(lblNom, gbc_lblNom);
 		
-		textField = new JTextField();
+		textFieldNom = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.anchor = GridBagConstraints.WEST;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 1;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		add(textFieldNom, gbc_textField);
+		textFieldNom.setColumns(10);
 		
 		JLabel lblNumroDeCompte = new JLabel("Num\u00E9ro de compte");
 		GridBagConstraints gbc_lblNumroDeCompte = new GridBagConstraints();
@@ -83,14 +86,14 @@ public class Banquier extends JPanel
 		gbc_lblNumroDeCompte.gridy = 2;
 		add(lblNumroDeCompte, gbc_lblNumroDeCompte);
 		
-		textField_1 = new JTextField();
+		textFieldNum1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.anchor = GridBagConstraints.WEST;
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 2;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		add(textFieldNum1, gbc_textField_1);
+		textFieldNum1.setColumns(10);
 		
 		JLabel lblSoldeInitial = new JLabel("Solde initial");
 		GridBagConstraints gbc_lblSoldeInitial = new GridBagConstraints();
@@ -100,14 +103,14 @@ public class Banquier extends JPanel
 		gbc_lblSoldeInitial.gridy = 3;
 		add(lblSoldeInitial, gbc_lblSoldeInitial);
 		
-		textField_2 = new JTextField();
+		textFieldSoldeI = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.anchor = GridBagConstraints.WEST;
 		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 3;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		add(textFieldSoldeI, gbc_textField_2);
+		textFieldSoldeI.setColumns(10);
 		
 		JLabel lblCeCompteEstil = new JLabel("Ce compte est-il :");
 		GridBagConstraints gbc_lblCeCompteEstil = new GridBagConstraints();
@@ -151,14 +154,14 @@ public class Banquier extends JPanel
 		gbc_lblTauxDeRmunration.gridy = 7;
 		add(lblTauxDeRmunration, gbc_lblTauxDeRmunration);
 		
-		textField_7 = new JTextField();
+		textFieldTxRem = new JTextField();
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.anchor = GridBagConstraints.WEST;
 		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_7.gridx = 1;
 		gbc_textField_7.gridy = 7;
-		add(textField_7, gbc_textField_7);
-		textField_7.setColumns(10);
+		add(textFieldTxRem, gbc_textField_7);
+		textFieldTxRem.setColumns(10);
 		
 		JLabel lblDcouvertAutoris = new JLabel("D\u00E9couvert autoris\u00E9");
 		GridBagConstraints gbc_lblDcouvertAutoris = new GridBagConstraints();
@@ -168,53 +171,56 @@ public class Banquier extends JPanel
 		gbc_lblDcouvertAutoris.gridy = 8;
 		add(lblDcouvertAutoris, gbc_lblDcouvertAutoris);
 		
-		textField_8 = new JTextField();
+		textFieldDecouAut = new JTextField();
 		GridBagConstraints gbc_textField_8 = new GridBagConstraints();
 		gbc_textField_8.anchor = GridBagConstraints.WEST;
 		gbc_textField_8.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_8.gridx = 1;
 		gbc_textField_8.gridy = 8;
-		add(textField_8, gbc_textField_8);
-		textField_8.setColumns(10);
+		add(textFieldDecouAut, gbc_textField_8);
+		textFieldDecouAut.setColumns(10);
 		
 		JButton btnCrer = new JButton("Cr\u00E9er");
 		btnCrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				// R�cup�ration des valeurs des textField
-				String name = textField.getText();
+				String name = textFieldNom.getText();
 				System.out.println("JE SUIS LE NAME : " + name);
 				
-				String tempo = textField_1.getText();
+				String tempo = textFieldNum1.getText();
 				int numCom = Integer.parseInt(tempo);
 				System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
 				
-				tempo = textField_2.getText();
+				tempo = textFieldSoldeI.getText();
 				double numSol = Double.parseDouble(tempo);
 				System.out.println("JE SUIS LE SOLDE : " + numSol);
 				
 				// Remise � z�ro des textField.
-				textField.setText("");
-				textField_1.setText("");
-				textField_2.setText("");
-				compte monCompte = new compte(numCom,name,numSol);
-				
-				monCompte.consulte();				
+				textFieldNom.setText("");
+				textFieldNum1.setText("");
+				textFieldSoldeI.setText("");
 				
 				if (rdbtnNewRadioButton.isSelected())
 				{
-					tempo = textField_7.getText();
+					tempo = textFieldTxRem.getText();
 					double tx = Double.parseDouble(tempo);
-					compte_epargne monCompteEp = new compte_epargne(numCom, name, numSol, tx);
+					monCompteEp = new compte_epargne(numCom, name, numSol, tx);
 					monCompteEp.consulte();
 				}
 				
 				else if (rdbtnCourant.isSelected())
 				{
-					tempo = textField_8.getText();
+					tempo = textFieldDecouAut.getText();
 					double decouvert = Double.parseDouble(tempo);
 					compte_courant monCompteCo = new compte_courant(numCom, name, numSol, decouvert);
 					monCompteCo.consulte();
+				}
+				
+				else
+				{
+					compte monCompte = new compte(numCom,name,numSol);
+					monCompte.consulte();
 				}
 			}
 		});
@@ -251,14 +257,14 @@ public class Banquier extends JPanel
 		gbc_lblNDuCompte.gridy = 12;
 		add(lblNDuCompte, gbc_lblNDuCompte);
 		
-		textField_4 = new JTextField();
+		textFieldNum2 = new JTextField();
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.anchor = GridBagConstraints.WEST;
 		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_4.gridx = 1;
 		gbc_textField_4.gridy = 12;
-		add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		add(textFieldNum2, gbc_textField_4);
+		textFieldNum2.setColumns(10);
 		
 		JLabel lblNouveauTauxDe = new JLabel("Nouveau taux de r\u00E9mun\u00E9ration");
 		GridBagConstraints gbc_lblNouveauTauxDe = new GridBagConstraints();
@@ -268,16 +274,24 @@ public class Banquier extends JPanel
 		gbc_lblNouveauTauxDe.gridy = 13;
 		add(lblNouveauTauxDe, gbc_lblNouveauTauxDe);
 		
-		textField_3 = new JTextField();
+		textFieldNouvTx = new JTextField();
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.anchor = GridBagConstraints.WEST;
 		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 13;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		add(textFieldNouvTx, gbc_textField_3);
+		textFieldNouvTx.setColumns(10);
 		
 		JButton btnModifier = new JButton("Modifier");
+		btnModifier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				String tempo = textFieldNouvTx.getText();
+				double valeur = Double.parseDouble(tempo);
+				monCompteEp.mise_a_jour(valeur);
+			}
+		});
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
 		gbc_btnModifier.anchor = GridBagConstraints.WEST;
 		gbc_btnModifier.insets = new Insets(0, 0, 5, 0);
@@ -310,14 +324,14 @@ public class Banquier extends JPanel
 		gbc_lblNDuCompte_1.gridy = 17;
 		add(lblNDuCompte_1, gbc_lblNDuCompte_1);
 		
-		textField_5 = new JTextField();
+		textFieldNum3 = new JTextField();
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.anchor = GridBagConstraints.WEST;
 		gbc_textField_5.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_5.gridx = 1;
 		gbc_textField_5.gridy = 17;
-		add(textField_5, gbc_textField_5);
-		textField_5.setColumns(10);
+		add(textFieldNum3, gbc_textField_5);
+		textFieldNum3.setColumns(10);
 		
 		JLabel lblNouveauDcouvert = new JLabel("Nouveau d\u00E9couvert");
 		GridBagConstraints gbc_lblNouveauDcouvert = new GridBagConstraints();
@@ -327,16 +341,24 @@ public class Banquier extends JPanel
 		gbc_lblNouveauDcouvert.gridy = 18;
 		add(lblNouveauDcouvert, gbc_lblNouveauDcouvert);
 		
-		textField_6 = new JTextField();
+		textFieldNouvDe = new JTextField();
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.anchor = GridBagConstraints.WEST;
 		gbc_textField_6.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_6.gridx = 1;
 		gbc_textField_6.gridy = 18;
-		add(textField_6, gbc_textField_6);
-		textField_6.setColumns(10);
+		add(textFieldNouvDe, gbc_textField_6);
+		textFieldNouvDe.setColumns(10);
 		
 		JButton btnModifier_1 = new JButton("Modifier");
+		btnModifier_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				String tempo = textFieldNouvDe.getText();
+				double valeur = Double.parseDouble(tempo);
+				monCompteCo.mise_a_jour(valeur);
+			}
+		});
 		GridBagConstraints gbc_btnModifier_1 = new GridBagConstraints();
 		gbc_btnModifier_1.anchor = GridBagConstraints.WEST;
 		gbc_btnModifier_1.gridx = 1;

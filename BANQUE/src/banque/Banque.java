@@ -1,14 +1,15 @@
 package banque;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.sql.*;
 
 public class Banque
 {
@@ -17,8 +18,22 @@ public class Banque
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver");
+	        System.out.println("Driver O.K.");
+
+	        String url = "jdbc:mysql://localhost:3306/Banque";
+	        String user = "root";
+	        String passwd = "";
+
+	        Connection conn = DriverManager.getConnection(url, user, passwd);
+	        System.out.println("Connexion effective !");         
+	           
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	      }  
 		
 		
 		EventQueue.invokeLater(new Runnable() {

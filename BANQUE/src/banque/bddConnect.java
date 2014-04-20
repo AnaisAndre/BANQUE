@@ -55,12 +55,12 @@ public class bddConnect
 		    }
 		}*/
 	}
-	public void insertionCompte(int num, String nom, double solde)
+	public void insertionCompte(int num, String nom, double solde, int type)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
         	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde);
-			int statut = statement.executeUpdate( "INSERT INTO compte (NUMERO, NOMTITULAIRE, SOLDE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + ");" );
+			int statut = statement.executeUpdate( "INSERT INTO compte (NUMERO, NOMTITULAIRE, SOLDE, TYPE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + ", " + type + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME " + e.getMessage());
@@ -68,12 +68,12 @@ public class bddConnect
 		}
 	}
 	
-	public void insertionCompteEpargne(int num, String nom, double solde, double taux)
+	public void insertionCompteEpargne(int num, String nom, double solde, int type, double taux)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
         	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "taux : " + taux);
-			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + taux + ");" );
+			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TYPE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," +type + "," + taux + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME " + e.getMessage());
@@ -81,16 +81,131 @@ public class bddConnect
 		}
 	}
 	
-	public void insertionCompteCourant(int num, String nom, double solde, double decouvertAuto)
+	public void insertionCompteCourant(int num, String nom, double solde, int type, double decouvertAuto)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
         	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "découvert autorisé : " + decouvertAuto);
-			int statut = statement.executeUpdate( "INSERT INTO compte_courant (NUMERO, NOMTITULAIRE, SOLDE, DECOUVERTAUTORISE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + decouvertAuto + ");" );
+			int statut = statement.executeUpdate( "INSERT INTO compte_courant (NUMERO, NOMTITULAIRE, SOLDE, TYPE, DECOUVERTAUTORISE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + type + "," + decouvertAuto + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME " + e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public void mise_a_jour_taux(int num, double taux)
+	{
+		/* Exécution d'une requête d'écriture */
+        try {
+        	System.out.println("Nouveau taux : " + taux);
+			int statut = statement.executeUpdate( "UPDATE compte_epargne SET TAUX = " + taux + " WHERE NUMERO = " + num + ";" );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void mise_a_jour_decouvert(int num, double decouv)
+	{
+		/* Exécution d'une requête d'écriture */
+        try {
+        	System.out.println("Nouveau decouvert : " + decouv);
+			int statut = statement.executeUpdate( "UPDATE compte_courant SET DECOUVERTAUTORISE = " + decouv + " WHERE NUMERO = " + num + ";" );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void consulte(int num)
+	{
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT NUMERO, SOLDE, NOMTITULAIRE  FROM compte WHERE " + num +" = NUMERO;" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+			    int numeroCom = resultat.getInt( "NUMERO" );
+			    double soldeCom = resultat.getDouble("SOLDE");
+			    String nomTit = resultat.getString("NOMTITULAIRE");
+
+			    /* Traiter ici les valeurs récupérées. */
+			    System.out.println("ICI LE NUM : " + numeroCom);
+			    System.out.println("ICI LE SOLDE : " + soldeCom);
+			    System.out.println("ICI LE NOM : " + nomTit);
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void manipuler(int num, double solde)
+	{
+		/* Exécution d'une requête d'écriture */
+        try {
+        	System.out.println("Nouveau solde : " + solde);
+			int statut = statement.executeUpdate( "UPDATE compte SET SOLDE = SOLDE + " + solde + " WHERE NUMERO = " + num + ";" );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public int recupType(int num)
+	{
+		int type = 0;
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT TYPE  FROM compte WHERE " + num +" = NUMERO;" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+			    type = resultat.getInt( "TYPE" );
+			    /* Traiter ici les valeurs récupérées. */
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		return type;
+	}
+	
+	public double recupTaux(int num)
+	{
+		double taux = 0;
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT TAUX  FROM compte_epargne WHERE " + num +" = NUMERO;" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+			    taux = resultat.getDouble( "TAUX" );
+			    /* Traiter ici les valeurs récupérées. */
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		return taux;
 	}
 	}

@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+
 public class Banquier extends JPanel 
 {
 	private JTextField textFieldNom;
@@ -35,6 +36,7 @@ public class Banquier extends JPanel
 	compte monCompte = new compte();
 	compte_epargne monCompteEp = new compte_epargne();
 	compte_courant monCompteCo = new compte_courant();
+
 
 	/**
 	 * Create the panel.
@@ -202,6 +204,7 @@ public class Banquier extends JPanel
 					tempo = textFieldTxRem.getText();
 					double tx = Double.parseDouble(tempo);
 					monCompteEp = new compte_epargne(numCom, name, numSol, tx);
+					base.insertionCompte();
 					monCompteEp.consulte();
 				}
 				

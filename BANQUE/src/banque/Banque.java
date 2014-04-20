@@ -20,23 +20,6 @@ public class Banque
 	 */
 	public static void main(String[] args) 
 	{
-		//Connexion à la base de données il te faut wampserver/phpmyadmin/uwamp... et créé une base Banque
-	    try {
-	        Class.forName("com.mysql.jdbc.Driver");
-	        System.out.println("Driver O.K.");
-
-	        String url = "jdbc:mysql://localhost:3306/Banque";
-	        String user = "root";
-	        String passwd = "";
-
-	        Connection conn = DriverManager.getConnection(url, user, passwd);
-	        System.out.println("Connexion effective !");         
-	           
-	      } catch (Exception e) {
-	        e.printStackTrace();
-	      }  
-		
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

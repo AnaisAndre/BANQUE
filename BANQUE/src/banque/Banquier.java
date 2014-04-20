@@ -36,6 +36,7 @@ public class Banquier extends JPanel
 	compte monCompte = new compte();
 	compte_epargne monCompteEp = new compte_epargne();
 	compte_courant monCompteCo = new compte_courant();
+	bddConnect base = new bddConnect();
 
 
 	/**
@@ -194,17 +195,13 @@ public class Banquier extends JPanel
 				double numSol = Double.parseDouble(tempo);
 				System.out.println("JE SUIS LE SOLDE : " + numSol);
 				
-				// Remise � z�ro des textField.
-				textFieldNom.setText("");
-				textFieldNum1.setText("");
-				textFieldSoldeI.setText("");
-				
 				if (rdbtnNewRadioButton.isSelected())
 				{
 					tempo = textFieldTxRem.getText();
 					double tx = Double.parseDouble(tempo);
 					monCompteEp = new compte_epargne(numCom, name, numSol, tx);
-					base.insertionCompte();
+					base.insertionCompte(numCom, name, numSol);
+					base.insertionCompteEpargne(numCom, name, numSol, tx);
 					monCompteEp.consulte();
 				}
 				
@@ -213,14 +210,24 @@ public class Banquier extends JPanel
 					tempo = textFieldDecouAut.getText();
 					double decouvert = Double.parseDouble(tempo);
 					compte_courant monCompteCo = new compte_courant(numCom, name, numSol, decouvert);
+					base.insertionCompte(numCom, name, numSol);
+					base.insertionCompteCourant(numCom, name, numSol, decouvert);
 					monCompteCo.consulte();
 				}
 				
 				else
 				{
 					compte monCompte = new compte(numCom,name,numSol);
+					base.insertionCompte(numCom, name, numSol);
 					monCompte.consulte();
 				}
+				
+				// Remise � z�ro des textField.
+				textFieldNom.setText("");
+				textFieldNum1.setText("");
+				textFieldSoldeI.setText("");
+				textFieldTxRem.setText("");
+				textFieldDecouAut.setText("");
 			}
 		});
 		

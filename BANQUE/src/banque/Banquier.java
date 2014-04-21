@@ -339,8 +339,8 @@ public class Banquier extends JPanel
 					tempo = textFieldTxRem.getText();
 					double tx = Double.parseDouble(tempo);
 					//monCompteEp = new compte_epargne(numCom, name, numSol, tx);
-					base.insertionCompte(numCom, name, numSol, '3');
-					base.insertionCompteEpargne(numCom, name, numSol, '3', tx);
+					base.insertionCompte(numCom, name, numSol, '2');
+					base.insertionCompteEpargne(numCom, name, numSol, '2', tx);
 					//monCompteEp.consulte();
 				}
 				
@@ -349,8 +349,8 @@ public class Banquier extends JPanel
 					tempo = textFieldDecouAut.getText();
 					double decouvert = Double.parseDouble(tempo);
 					//compte_courant monCompteCo = new compte_courant(numCom, name, numSol, decouvert);
-					base.insertionCompte(numCom, name, numSol, '2');
-					base.insertionCompteCourant(numCom, name, numSol, '2', decouvert);
+					base.insertionCompte(numCom, name, numSol, '3');
+					base.insertionCompteCourant(numCom, name, numSol, '3', decouvert);
 					//monCompteCo.consulte();
 				}
 				

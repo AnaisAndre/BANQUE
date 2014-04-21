@@ -376,17 +376,23 @@ public class Banquier extends JPanel
 			{
 				if (type == 2)
 				{
-					String tempo = textFieldNouvDe.getText();
-					double valeurDecouv = Double.parseDouble(tempo);
-					base.mise_a_jour_decouvert(numCom, valeurDecouv);
-				}
-				
-				else if (type == 3)
-				{
 					String tempo = textFieldNouvTx.getText();
 					double valeurTx = Double.parseDouble(tempo);
 					base.mise_a_jour_taux(numCom, valeurTx);
 					//monCompteEp.mise_a_jour(valeurTx);
+					textFieldNouvTx.setText("");
+					double tauxActu = base.recupTaux(numCom);
+					textFieldTauxActu.setText(String.valueOf(tauxActu));
+				}
+				
+				else if (type == 3)
+				{
+					String tempo = textFieldNouvDe.getText();
+					double valeurDecouv = Double.parseDouble(tempo);
+					base.mise_a_jour_decouvert(numCom, valeurDecouv);
+					textFieldNouvDe.setText("");
+					double decouvActu = base.recupDecouvert(numCom);
+					textFieldDecouvActu.setText(String.valueOf(decouvActu));
 				}
 			}
 		});
@@ -412,25 +418,31 @@ public class Banquier extends JPanel
 				numCom = Integer.parseInt(tempo);
 				System.out.println("Voici le numéro de compte : " + numCom);
 				type = base.recupType(numCom);
+				
 				System.out.println("VOICI LE TYPE : " + type);
 				switch (type)
 				{
 				case 1 :
+					textFieldTauxActu.setText("");
+					textFieldDecouvActu.setText("");
 					textField.setText("Classique");
 					break;
 				case 2 :
-					textField.setText("Courant");
+					textFieldDecouvActu.setText("");
+					textField.setText("Epargne");
+					double tauxActu = base.recupTaux(numCom);
+					textFieldTauxActu.setText(String.valueOf(tauxActu));
 					break;
 				case 3 :
-					textField.setText("Epargne");
+					textFieldTauxActu.setText("");
+					textField.setText("Courant");
+					double decouvActu = base.recupDecouvert(numCom);
+					textFieldDecouvActu.setText(String.valueOf(decouvActu));
+					
 					break;
 				default:
 					textField.setText("ERREUR");
 				}
-				
-				double tauxActu = base.recupTaux(numCom);
-				textFieldTauxActu.setText(String.valueOf(tauxActu));
-				
 			}
 		});
 		

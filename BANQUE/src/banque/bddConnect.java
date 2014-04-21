@@ -120,8 +120,9 @@ public class bddConnect
 		}
 	}
 	
-	public void consulte(int num)
+	public double consulte(int num)
 	{
+		 double soldeCom = 0;
 		/* Exécution d'une requête de lecture */
 		try
 		{
@@ -131,7 +132,7 @@ public class bddConnect
 			while ( resultat.next() )
 			{
 			    int numeroCom = resultat.getInt( "NUMERO" );
-			    double soldeCom = resultat.getDouble("SOLDE");
+			    soldeCom = resultat.getDouble("SOLDE");
 			    String nomTit = resultat.getString("NOMTITULAIRE");
 
 			    /* Traiter ici les valeurs récupérées. */
@@ -146,14 +147,15 @@ public class bddConnect
 			System.out.println("PROBLEME SELECT " + e.getMessage());
 			e.printStackTrace();
 		}
+		return soldeCom;
 	}
 	
-	public void manipuler(int num, double solde)
+	public void manipuler(int num, double somme)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("Nouveau solde : " + solde);
-			int statut = statement.executeUpdate( "UPDATE compte SET SOLDE = SOLDE + " + solde + " WHERE NUMERO = " + num + ";" );
+        	System.out.println("Nouveau solde : " + somme);
+			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE + " + somme + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
@@ -191,7 +193,7 @@ public class bddConnect
 		/* Exécution d'une requête de lecture */
 		try
 		{
-			ResultSet resultat = statement.executeQuery( "SELECT TAUX  FROM compte_epargne WHERE " + num +" = NUMERO;" );
+			ResultSet resultat = statement.executeQuery( "SELECT TAUX  FROM compte_epargne WHERE NUMERO = " + num + ";" );
 
 			/* Récupération des données du résultat de la requête de lecture */
 			while ( resultat.next() )
@@ -207,5 +209,29 @@ public class bddConnect
 			e.printStackTrace();
 		}
 		return taux;
+	}
+	
+	public double recupDecouvert(int num)
+	{
+		double decouvert = 0;
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT DECOUVERTAUTORISE  FROM compte_courant WHERE NUMERO = " + num + ";" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+			    decouvert = resultat.getDouble( "DECOUVERTAUTORISE" );
+			    /* Traiter ici les valeurs récupérées. */
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		return decouvert;
 	}
 	}

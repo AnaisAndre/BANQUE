@@ -26,6 +26,9 @@ public class Client extends JPanel
 	compte_epargne monCompteEp = new compte_epargne();
 	compte_courant monCompteCo = new compte_courant();
 	bddConnect base = new bddConnect();
+	
+	int numCom;
+	int type = 0;
 	/**
 	 * Create the panel.
 	 */
@@ -91,11 +94,37 @@ public class Client extends JPanel
 		btnAfficherLeSolde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+				textField_5.setText("");
+				textField_7.setText("");
 				// Récupération des valeurs des textField
 				String tempo = textField.getText();
-				int numCom = Integer.parseInt(tempo);
-				base.consulte(numCom);
+				numCom = Integer.parseInt(tempo);
+				double sol = base.consulte(numCom);
+				System.out.println("SOL : " + sol);
+				textField_3.setText(String.valueOf(sol));
 				System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
+				
+				type = base.recupType(numCom);
+				switch (type)
+				{
+				case 1 :
+					break;
+				case 2 :
+					double tauxActu = base.recupTaux(numCom);
+					System.out.println("TAUX : " + tauxActu);
+					textField_4.setText(String.valueOf(tauxActu));
+					break;
+				case 3 :
+					double decouvActu = base.recupDecouvert(numCom);
+					System.out.println("DECOUV : " + decouvActu);
+					textField_5.setText(String.valueOf(decouvActu));
+					break;
+				default:
+					textField.setText("ERREUR");
+				}
 			}
 		});
 		
@@ -128,12 +157,13 @@ public class Client extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				// Récupération des valeurs des textField
-				String tempo = textField_1.getText();
-				int numCom = Integer.parseInt(tempo);
-				tempo = textField_2.getText();
+				String tempo = textField_2.getText();
 				double somme = Integer.parseInt(tempo);
-				
 				base.manipuler(numCom, somme);
+				
+				double sol = base.consulte(numCom);
+				textField_7.setText(String.valueOf(sol));
+				//base.manipuler(numCom, sol);
 				System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
 			}
 		});

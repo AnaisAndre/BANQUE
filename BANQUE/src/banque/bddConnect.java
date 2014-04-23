@@ -59,7 +59,7 @@ public class bddConnect
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde);
+        	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde);
 			int statut = statement.executeUpdate( "INSERT INTO compte (NUMERO, NOMTITULAIRE, SOLDE, TYPE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + ", " + type + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -72,7 +72,7 @@ public class bddConnect
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "taux : " + taux);
+        	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "taux : " + taux);
 			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TYPE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," +type + "," + taux + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,7 +85,7 @@ public class bddConnect
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "découvert autorisé : " + decouvertAuto);
+        	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "découvert autorisé : " + decouvertAuto);
 			int statut = statement.executeUpdate( "INSERT INTO compte_courant (NUMERO, NOMTITULAIRE, SOLDE, TYPE, DECOUVERTAUTORISE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + type + "," + decouvertAuto + ");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +98,7 @@ public class bddConnect
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("Nouveau taux : " + taux);
+        	//System.out.println("Nouveau taux : " + taux);
 			int statut = statement.executeUpdate( "UPDATE compte_epargne SET TAUX = " + taux + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,7 +111,7 @@ public class bddConnect
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("Nouveau decouvert : " + decouv);
+        	//System.out.println("Nouveau decouvert : " + decouv);
 			int statut = statement.executeUpdate( "UPDATE compte_courant SET DECOUVERTAUTORISE = " + decouv + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -136,9 +136,9 @@ public class bddConnect
 			    String nomTit = resultat.getString("NOMTITULAIRE");
 
 			    /* Traiter ici les valeurs récupérées. */
-			    System.out.println("ICI LE NUM : " + numeroCom);
-			    System.out.println("ICI LE SOLDE : " + soldeCom);
-			    System.out.println("ICI LE NOM : " + nomTit);
+			    //System.out.println("ICI LE NUM : " + numeroCom);
+			    //System.out.println("ICI LE SOLDE : " + soldeCom);
+			    //System.out.println("ICI LE NOM : " + nomTit);
 			}
 		}
 			catch (SQLException e)
@@ -150,12 +150,25 @@ public class bddConnect
 		return soldeCom;
 	}
 	
-	public void manipuler(int num, double somme)
+	public void deposer(int num, double somme)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
-        	System.out.println("Nouveau solde : " + somme);
+        	//System.out.println("Nouveau solde : " + somme);
 			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE + " + somme + " WHERE NUMERO = " + num + ";" );
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void retirer(int num, double somme)
+	{
+		/* Exécution d'une requête d'écriture */
+        try {
+        	//System.out.println("Nouveau solde : " + somme);
+			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE - " + somme + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());

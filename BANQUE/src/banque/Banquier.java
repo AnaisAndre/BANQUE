@@ -42,7 +42,7 @@ public class Banquier extends JPanel
 	compte_courant monCompteCo = new compte_courant();
 	bddConnect base = new bddConnect();
 	
-	int numCom;
+	int numCom = 0;
 	int type = 0;
 	private JTextField textField;
 	
@@ -318,6 +318,12 @@ public class Banquier extends JPanel
 		add(textFieldDecouAut, gbc_textField_8);
 		textFieldDecouAut.setColumns(10);
 		
+		
+		
+		
+		
+		
+		
 		JButton btnCrer = new JButton("Cr\u00E9er");
 		btnCrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
@@ -338,26 +344,31 @@ public class Banquier extends JPanel
 				{
 					tempo = textFieldTxRem.getText();
 					double tx = Double.parseDouble(tempo);
+					type = 2;
 					//monCompteEp = new compte_epargne(numCom, name, numSol, tx);
-					base.insertionCompte(numCom, name, numSol, '2');
-					base.insertionCompteEpargne(numCom, name, numSol, '2', tx);
+					base.insertionCompte(numCom, name, numSol, type);
+					base.insertionCompteEpargne(numCom, name, numSol, type, tx);
 					//monCompteEp.consulte();
+					//System.out.println("VOICI LE TYPE DU COMPTE EP : " + type);
 				}
 				
 				else if (rdbtnCourant.isSelected())
 				{
 					tempo = textFieldDecouAut.getText();
 					double decouvert = Double.parseDouble(tempo);
+					type = 3;
 					//compte_courant monCompteCo = new compte_courant(numCom, name, numSol, decouvert);
-					base.insertionCompte(numCom, name, numSol, '3');
-					base.insertionCompteCourant(numCom, name, numSol, '3', decouvert);
+					base.insertionCompte(numCom, name, numSol, type);
+					base.insertionCompteCourant(numCom, name, numSol, type, decouvert);
 					//monCompteCo.consulte();
+					//System.out.println("VOICI LE TYPE DU COMPTE CO : " + type);
 				}
 				
 				else
 				{
 					//compte monCompte = new compte(numCom,name,numSol);
-					base.insertionCompte(numCom, name, numSol, '1');
+					type = 1;
+					base.insertionCompte(numCom, name, numSol, type);
 					//monCompte.consulte();
 				}
 				
@@ -367,6 +378,7 @@ public class Banquier extends JPanel
 				textFieldSoldeI.setText("");
 				textFieldTxRem.setText("");
 				textFieldDecouAut.setText("");
+				buttonGroup.clearSelection();
 			}
 		});
 		
@@ -416,10 +428,10 @@ public class Banquier extends JPanel
 			{
 				String tempo = textFieldNum2.getText();
 				numCom = Integer.parseInt(tempo);
-				System.out.println("Voici le numéro de compte : " + numCom);
+				//System.out.println("Voici le numéro de compte : " + numCom);
 				type = base.recupType(numCom);
 				
-				System.out.println("VOICI LE TYPE : " + type);
+				//System.out.println("VOICI LE TYPE : " + type);
 				switch (type)
 				{
 				case 1 :

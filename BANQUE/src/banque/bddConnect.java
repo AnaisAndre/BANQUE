@@ -247,4 +247,37 @@ public class bddConnect
 		}
 		return decouvert;
 	}
+	
+	public void compteEpAndCo()
+	{
+		String titulaire = "";
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT compte_epargne.NOMTITULAIRE AS Epargnant, compte_courant.NOMTITULAIRE AS Client FROM compte_epargne, compte_courant WHERE compte_epargne.NOMTITULAIRE = compte_courant.NOMTITULAIRE;" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+				titulaire = resultat.getString( "Epargnant" );
+			    /* Traiter ici les valeurs récupérées. */
+			}
+			if (titulaire.equals(""))
+			{
+				System.out.println("Aucun client ne dispose d'un compte épargne et d'un compte courant.");
+			}
+			else
+			{
+				System.out.println(titulaire);
+			}
+			
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		//return titulaire;
+	}
 	}

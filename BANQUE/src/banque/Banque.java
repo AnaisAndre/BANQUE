@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+
 import java.sql.*;
 
 public class Banque
@@ -20,6 +21,8 @@ public class Banque
 	 */
 	public static void main(String[] args) 
 	{
+		bddConnect base = new bddConnect();
+		base.compteEpAndCo();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

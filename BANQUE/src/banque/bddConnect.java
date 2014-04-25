@@ -11,6 +11,10 @@ public class bddConnect
 	Statement statement = null;
 	ResultSet resultat = null;
 	
+	/**
+	 * Constructeur par défaut
+	 * Il se charge de la connexion à la base de donnée
+	 */
 	public bddConnect()
 	{
 		try
@@ -55,6 +59,17 @@ public class bddConnect
 		    }
 		}*/
 	}
+	/**
+	 * Procédure d'insertion en base d'un compte
+	 * @param num
+	 * 		: Envoi du numéro de compte
+	 * @param nom
+	 * 		: Envoi du nom du titulaire du compte
+	 * @param solde
+	 * 		: Le solde initial à l'ouverture du compte
+	 * @param type
+	 * 		: Ce paramètre va nous permettre de connaitre le type de compte (classique, épargne ou courant)
+	 */
 	public void insertionCompte(int num, String nom, double solde, int type)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -67,7 +82,12 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Procédure d'insertion en base d'un compte épargne
+	 * @param taux
+	 * 		: taux de rémunération du compte
+	 * @see insertionCompte
+	 */
 	public void insertionCompteEpargne(int num, String nom, double solde, int type, double taux)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -80,7 +100,12 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Procédure d'instertion en base d'un compte courant
+	 * @param decouvertAuto
+	 * 		: Paramètre permettant de connaitre le découvert auquel a le droit le client
+	 * @see insertionCompte
+	 */
 	public void insertionCompteCourant(int num, String nom, double solde, int type, double decouvertAuto)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -94,6 +119,12 @@ public class bddConnect
 		}
 	}
 	
+	/**
+	 * Procédure de mise à jour en base du taux de rémunération d'un compte épargne
+	 * @param taux
+	 * 		: reçoit en paramètre le nouveau taux définit par le banquier
+	 * @see insertionCompteEpargne
+	 */
 	public void mise_a_jour_taux(double taux)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -106,7 +137,14 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Procédure de mise à jour d'un découvert autorisé en passant en paramètre
+	 * @param num
+	 * 		: le numéro de compte du client
+	 * @param decouv
+	 * 		: le nouveau montant du découvert autorisé
+	 * @see insertionCompteCourant
+	 */
 	public void mise_a_jour_decouvert(int num, double decouv)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -119,7 +157,11 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 */
 	public double consulte(int num)
 	{
 		 double soldeCom = 0;

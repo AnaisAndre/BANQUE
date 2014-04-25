@@ -27,7 +27,6 @@ public class Banquier extends JPanel
 	private JTextField textFieldNum1;
 	private JTextField textFieldNum2;
 	private JTextField textFieldSoldeI;
-	private JTextField textFieldTxRem;
 	private JTextField textFieldNouvTx;
 	private JTextField textFieldDecouAut;
 	private JTextField textFieldNouvDe;
@@ -267,23 +266,6 @@ public class Banquier extends JPanel
 		add(textFieldDecouvActu, gbc_textFieldDecouvActu);
 		textFieldDecouvActu.setColumns(10);
 		
-		JLabel lblTauxDeRmunration = new JLabel("Taux de r\u00E9mun\u00E9ration");
-		GridBagConstraints gbc_lblTauxDeRmunration = new GridBagConstraints();
-		gbc_lblTauxDeRmunration.anchor = GridBagConstraints.EAST;
-		gbc_lblTauxDeRmunration.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTauxDeRmunration.gridx = 0;
-		gbc_lblTauxDeRmunration.gridy = 9;
-		add(lblTauxDeRmunration, gbc_lblTauxDeRmunration);
-		
-		textFieldTxRem = new JTextField();
-		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-		gbc_textField_7.anchor = GridBagConstraints.WEST;
-		gbc_textField_7.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_7.gridx = 1;
-		gbc_textField_7.gridy = 9;
-		add(textFieldTxRem, gbc_textField_7);
-		textFieldTxRem.setColumns(10);
-		
 		JLabel lblNouveauDcouvert = new JLabel("Nouveau d\u00E9couvert");
 		GridBagConstraints gbc_lblNouveauDcouvert = new GridBagConstraints();
 		gbc_lblNouveauDcouvert.anchor = GridBagConstraints.EAST;
@@ -338,16 +320,17 @@ public class Banquier extends JPanel
 				
 				tempo = textFieldSoldeI.getText();
 				double numSol = Double.parseDouble(tempo);
+				double taux = base.recupTaux(numCom);
 				//System.out.println("JE SUIS LE SOLDE : " + numSol);
 				
 				if (rdbtnNewRadioButton.isSelected())
 				{
-					tempo = textFieldTxRem.getText();
-					double tx = Double.parseDouble(tempo);
+					/*tempo = textFieldTxRem.getText();
+					double tx = Double.parseDouble(tempo);*/
 					type = 2;
 					//monCompteEp = new compte_epargne(numCom, name, numSol, tx);
 					base.insertionCompte(numCom, name, numSol, type);
-					base.insertionCompteEpargne(numCom, name, numSol, type, tx);
+					base.insertionCompteEpargne(numCom, name, numSol, type, taux);
 					//monCompteEp.consulte();
 					//System.out.println("VOICI LE TYPE DU COMPTE EP : " + type);
 				}
@@ -376,7 +359,6 @@ public class Banquier extends JPanel
 				textFieldNom.setText("");
 				textFieldNum1.setText("");
 				textFieldSoldeI.setText("");
-				textFieldTxRem.setText("");
 				textFieldDecouAut.setText("");
 				buttonGroup.clearSelection();
 			}
@@ -390,9 +372,16 @@ public class Banquier extends JPanel
 				{
 					String tempo = textFieldNouvTx.getText();
 					double valeurTx = Double.parseDouble(tempo);
-					base.mise_a_jour_taux(numCom, valeurTx);
+					if (valeurTx <0)
+					{
+						textFieldNouvTx.setText("Taux invalide");
+					}
+					else
+					{
+						base.mise_a_jour_taux(valeurTx);
+						textFieldNouvTx.setText("");
+					}
 					//monCompteEp.mise_a_jour(valeurTx);
-					textFieldNouvTx.setText("");
 					double tauxActu = base.recupTaux(numCom);
 					textFieldTauxActu.setText(String.valueOf(tauxActu));
 				}

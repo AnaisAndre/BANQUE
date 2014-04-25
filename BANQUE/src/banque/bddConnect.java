@@ -29,7 +29,7 @@ public class bddConnect
 		catch ( SQLException e )
 		{
 		    /* Traiter les erreurs éventuelles ici. */
-			System.out.println("TUTUUUU");
+			//System.out.println("TUTUUUU");
 			System.out.println("Connection problem " + e.getMessage());
 		} /*finally {
 		    if ( resultat != null ) {
@@ -73,7 +73,7 @@ public class bddConnect
 		/* Exécution d'une requête d'écriture */
         try {
         	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "taux : " + taux);
-			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TYPE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," +type + "," + taux + ");" );
+			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TYPE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + type + "," + taux +");" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME " + e.getMessage());
@@ -94,12 +94,12 @@ public class bddConnect
 		}
 	}
 	
-	public void mise_a_jour_taux(int num, double taux)
+	public void mise_a_jour_taux(double taux)
 	{
 		/* Exécution d'une requête d'écriture */
         try {
         	//System.out.println("Nouveau taux : " + taux);
-			int statut = statement.executeUpdate( "UPDATE compte_epargne SET TAUX = " + taux + " WHERE NUMERO = " + num + ";" );
+			int statut = statement.executeUpdate( "UPDATE compte_epargne SET TAUX = " + taux + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
@@ -115,7 +115,7 @@ public class bddConnect
 			int statut = statement.executeUpdate( "UPDATE compte_courant SET DECOUVERTAUTORISE = " + decouv + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			System.out.println("PROBLEME UPDATE DECOUVERT " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -158,7 +158,7 @@ public class bddConnect
 			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE + " + somme + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			System.out.println("PROBLEME UPDATE DEPOT " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -171,7 +171,7 @@ public class bddConnect
 			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE - " + somme + " WHERE NUMERO = " + num + ";" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("PROBLEME UPDATE TAUX " + e.getMessage());
+			System.out.println("PROBLEME UPDATE RETRAIT " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -206,7 +206,7 @@ public class bddConnect
 		/* Exécution d'une requête de lecture */
 		try
 		{
-			ResultSet resultat = statement.executeQuery( "SELECT TAUX  FROM compte_epargne WHERE NUMERO = " + num + ";" );
+			ResultSet resultat = statement.executeQuery( "SELECT TAUX  FROM compte_epargne;" );
 
 			/* Récupération des données du résultat de la requête de lecture */
 			while ( resultat.next() )

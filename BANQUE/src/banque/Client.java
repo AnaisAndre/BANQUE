@@ -26,6 +26,8 @@ public class Client extends JPanel
 	compte_epargne monCompteEp = new compte_epargne();
 	compte_courant monCompteCo = new compte_courant();
 	bddConnect base = new bddConnect();
+	double decouvActu = 0;
+	double sol = 0;
 	
 	int numCom;
 	int type = 0;
@@ -205,7 +207,7 @@ public class Client extends JPanel
 				// Récupération des valeurs des textField
 				String tempo = textField.getText();
 				numCom = Integer.parseInt(tempo);
-				double sol = base.consulte(numCom);
+				sol = base.consulte(numCom);
 				//System.out.println("SOL : " + sol);
 				textField_3.setText(String.valueOf(sol));
 				//System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
@@ -221,7 +223,7 @@ public class Client extends JPanel
 					textField_4.setText(String.valueOf(tauxActu));
 					break;
 				case 3 :
-					double decouvActu = base.recupDecouvert(numCom);
+					decouvActu = base.recupDecouvert(numCom);
 					//System.out.println("DECOUV : " + decouvActu);
 					textField_5.setText(String.valueOf(decouvActu));
 					break;
@@ -243,24 +245,41 @@ public class Client extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				// Récupération des valeurs des textField
-				if (textField_2.getText().equals(""))
-				{
-					textField_2.setText("0");
-				}
-				String tempo = textField_2.getText();
-				double somme = Integer.parseInt(tempo);
-				base.retirer(numCom, somme);
-				
 				if (textField_1.getText().equals(""))
 				{
 					textField_1.setText("0");
 				}
-				tempo = textField_1.getText();
-				double sommeBis = Integer.parseInt(tempo);
-				base.deposer(numCom, sommeBis);
+				String tempo = textField_1.getText();
+				double sommeBis = Double.parseDouble(tempo);
 				
-				double sol = base.consulte(numCom);
+				if (sommeBis <0)
+				{
+					textField_1.setText("Dépôt invalide");
+				}
+				else
+				{
+					base.deposer(numCom, sommeBis);
+				}
+				
+				if (textField_2.getText().equals(""))
+				{
+					textField_2.setText("0");
+				}
+				tempo = textField_2.getText();
+				double somme = Double.parseDouble(tempo);
+				
+				if ((decouvActu + sol) < somme)
+				{
+					textField_2.setText("Decouvert dépassé");
+				}
+				else
+				{
+					base.retirer(numCom, somme);
+				}
+				
+				sol = base.consulte(numCom);
 				textField_7.setText(String.valueOf(sol));
+				textField_3.setText(String.valueOf(sol));
 				//base.manipuler(numCom, sol);
 				//System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
 			}

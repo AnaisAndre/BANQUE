@@ -23,6 +23,7 @@ public class Banque
 	{
 		bddConnect base = new bddConnect();
 		base.compteEpAndCo();
+		base.titulaireEnDecouvert();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

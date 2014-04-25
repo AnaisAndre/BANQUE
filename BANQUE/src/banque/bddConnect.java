@@ -322,4 +322,31 @@ public class bddConnect
 		}
 		//return titulaire;
 	}
+	
+	public void titulaireEnDecouvert()
+	{
+		double decouvert;
+		String titulaire;
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT NOMTITULAIRE, DECOUVERTAUTORISE  FROM compte_courant WHERE DECOUVERTAUTORISE < 0;" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+			    decouvert = resultat.getDouble( "DECOUVERTAUTORISE" );
+			    titulaire = resultat.getString( "NOMTITULAIRE" );
+			    /* Traiter ici les valeurs récupérées. */
+			    System.out.println(decouvert + " : " + titulaire);
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		//return decouvert;
+	}
 	}

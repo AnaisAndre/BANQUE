@@ -17,7 +17,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-
+/**
+ * Fenêtre permetteant au client de manipulé ses comptes
+ * @author Anaïs, Bruno
+ *
+ */
 public class Client extends JPanel
 {
 	private JTextField textField;
@@ -26,9 +30,6 @@ public class Client extends JPanel
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_7;
-	compte monCompte = new compte();
-	compte_epargne monCompteEp = new compte_epargne();
-	compte_courant monCompteCo = new compte_courant();
 	bddConnect base = new bddConnect();
 	double decouvActu = 0;
 	double sol = 0;

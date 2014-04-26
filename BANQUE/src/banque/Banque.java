@@ -9,7 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-
+/**
+ * Programme principal du TP Banque.
+ * @author Anaïs, Bruno
+ * @version 1.0
+ *
+ */
 public class Banque
 {
 	private JFrame frame;

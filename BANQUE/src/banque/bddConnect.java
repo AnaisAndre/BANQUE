@@ -38,29 +38,7 @@ public class bddConnect
 		    /* Traiter les erreurs éventuelles ici. */
 			//System.out.println("TUTUUUU");
 			System.out.println("Connection problem " + e.getMessage());
-		} /*finally {
-		    if ( resultat != null ) {
-		        try {
-		             On commence par fermer le ResultSet 
-		            resultat.close();
-		        } catch ( SQLException ignore ) {
-		        }
-		    }
-		    if ( statement != null ) {
-		        try {
-		             Puis on ferme le Statement 
-		            statement.close();
-		        } catch ( SQLException ignore ) {
-		        }
-		    }
-		    if ( connexion != null ) {
-		        try {
-		             Et enfin on ferme la connexion 
-		            connexion.close();
-		        } catch ( SQLException ignore ) {
-		        }
-		    }
-		}*/
+		}
 	}
 	/**
 	 * Procédure d'insertion en base d'un compte
@@ -173,9 +151,10 @@ public class bddConnect
 		}
 	}
 	/**
-	 * 
+	 * Requête affichant le solde du compte
 	 * @param num
-	 * @return
+	 * @return Le solde du client
+	 * 
 	 */
 	public double consulte(int num)
 	{
@@ -192,10 +171,6 @@ public class bddConnect
 			    soldeCom = resultat.getDouble("SOLDE");
 			    String nomTit = resultat.getString("NOMTITULAIRE");
 
-			    /* Traiter ici les valeurs récupérées. */
-			    //System.out.println("ICI LE NUM : " + numeroCom);
-			    //System.out.println("ICI LE SOLDE : " + soldeCom);
-			    //System.out.println("ICI LE NOM : " + nomTit);
 			}
 		}
 			catch (SQLException e)
@@ -206,7 +181,13 @@ public class bddConnect
 		}
 		return soldeCom;
 	}
-	
+	/**
+	 * Requête permettant de déposer une somme entrée par le client.
+	 * @param num
+	 * 		: Envoi du numéro de compte
+	 * @param somme
+	 * 		: Envoi de la somme que veut déposer le client
+	 */
 	public void deposer(int num, double somme)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -220,7 +201,13 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Requête permettant d'effectuer un retrait sur le compte du client
+	 * @param num
+	 * 		: Envoi du numéro de compte
+	 * @param somme
+	 * 		: Envoi de la somme à retirer
+	 */
 	public void retirer(int num, double somme)
 	{
 		/* Exécution d'une requête d'écriture */
@@ -235,7 +222,12 @@ public class bddConnect
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Requête de recherche de type de compte
+	 * @param num
+	 * 		: Envoi du numéro de compte qui permet la recherche du type de compte (épargne, courant, classique)
+	 * @return Le type de compte 1 pour classique 2 pour épargne et 3 pour un compte courant
+	 */
 	public int recupType(int num)
 	{
 		int type = 0;
@@ -259,7 +251,12 @@ public class bddConnect
 		}
 		return type;
 	}
-	
+	/**
+	 * Requête permettant de récupéré le taux de rémunération des comptes
+	 * @param num
+	 * 		: Envoi du numéro de compte afin de pouvoir récupéré le taux de réùunération
+	 * @return Le taux de rémunération du compte
+	 */
 	public double recupTaux(int num)
 	{
 		double taux = 0;
@@ -283,7 +280,12 @@ public class bddConnect
 		}
 		return taux;
 	}
-	
+	/**
+	 * Requête permettant de récupéré le découvert pour un compte courant
+	 * @param num
+	 * 		: Envoi du numéro de compte afin de récupérer le découvert
+	 * @return Le découvert autorisé pour le compte en cours de consultation
+	 */
 	public double recupDecouvert(int num)
 	{
 		double decouvert = 0;
@@ -307,7 +309,10 @@ public class bddConnect
 		}
 		return decouvert;
 	}
-	
+	/**
+	 * Requête qui va rechercher qui possède un compte épargene et un compte courant
+	 * @return Retourne le nom du titulaire des deux comptes
+	 */
 	public String compteEpAndCo()
 	{
 		String titulaire = "";
@@ -342,7 +347,10 @@ public class bddConnect
 		}
 		return result;
 	}
-	
+	/**
+	 * Reqête de recherche de tous les clients en découvert
+	 * @return Le nom de toutes les personnes étant en découvert
+	 */
 	public String titulaireEnDecouvert()
 	{
 		double decouvert;
@@ -371,7 +379,12 @@ public class bddConnect
 		}
 		return result;
 	}
-	
+	/**
+	 * Requête permettant d'afficher l'historique d'un compte
+	 * @param num
+	 * 		: Envoi du numéro de compte afin de trouver toutes les opération lié au compte en cours de consultation
+	 * @return Tous les dépôts ou retraits effectués par le client
+	 */
 	public String afficheConsulations(int num)
 	{
 		double numero;

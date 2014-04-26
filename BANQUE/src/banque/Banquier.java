@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-
 public class Banquier extends JPanel 
 {
 	private JTextField textFieldNom;
@@ -44,9 +43,7 @@ public class Banquier extends JPanel
 	private JTextArea textArea;
 	private JTextArea textArea_1;
 	
-	compte monCompte = new compte();
-	compte_epargne monCompteEp = new compte_epargne();
-	compte_courant monCompteCo = new compte_courant();
+
 	bddConnect base = new bddConnect();
 	
 	
@@ -371,9 +368,6 @@ public class Banquier extends JPanel
 		{
 			textArea.setText(titCompteEpAndCo);
 		}
-		
-		
-		
 		
 		
 		JButton btnCrer = new JButton("Cr\u00E9er");

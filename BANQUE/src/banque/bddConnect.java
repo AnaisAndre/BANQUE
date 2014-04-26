@@ -198,6 +198,7 @@ public class bddConnect
         try {
         	//System.out.println("Nouveau solde : " + somme);
 			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE + " + somme + " WHERE NUMERO = " + num + ";" );
+			int statutBis = statement.executeUpdate("INSERT INTO consultations (NUMERO_COMPTE, TYPEOPERATION, MONTANT, DATE) VALUES (" + num + ", 'Dépôt', " + somme + ", NOW());" );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME UPDATE DEPOT " + e.getMessage());
@@ -211,6 +212,8 @@ public class bddConnect
         try {
         	//System.out.println("Nouveau solde : " + somme);
 			int statut = statement.executeUpdate("UPDATE compte SET SOLDE = SOLDE - " + somme + " WHERE NUMERO = " + num + ";" );
+			int statutBis = statement.executeUpdate("INSERT INTO consultations (NUMERO_COMPTE, TYPEOPERATION, MONTANT, DATE) VALUES (" + num + ", 'Retrait', " + somme + ", NOW());" );
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("PROBLEME UPDATE RETRAIT " + e.getMessage());
@@ -290,9 +293,10 @@ public class bddConnect
 		return decouvert;
 	}
 	
-	public void compteEpAndCo()
+	public String compteEpAndCo()
 	{
 		String titulaire = "";
+		String result = "";
 		/* Exécution d'une requête de lecture */
 		try
 		{
@@ -303,15 +307,16 @@ public class bddConnect
 			{
 				titulaire = resultat.getString( "Epargnant" );
 			    /* Traiter ici les valeurs récupérées. */
+				result = (result + "\n" + titulaire); 
 			}
-			if (titulaire.equals(""))
+			/*if (titulaire.equals(""))
 			{
 				System.out.println("Aucun client ne dispose d'un compte épargne et d'un compte courant.");
 			}
 			else
 			{
 				System.out.println(titulaire);
-			}
+			}*/
 			
 		}
 			catch (SQLException e)
@@ -320,13 +325,14 @@ public class bddConnect
 			System.out.println("PROBLEME SELECT " + e.getMessage());
 			e.printStackTrace();
 		}
-		//return titulaire;
+		return result;
 	}
 	
-	public void titulaireEnDecouvert()
+	public String titulaireEnDecouvert()
 	{
 		double decouvert;
 		String titulaire;
+		String result = "";
 		/* Exécution d'une requête de lecture */
 		try
 		{
@@ -338,7 +344,41 @@ public class bddConnect
 			    decouvert = resultat.getDouble( "DECOUVERTAUTORISE" );
 			    titulaire = resultat.getString( "NOMTITULAIRE" );
 			    /* Traiter ici les valeurs récupérées. */
-			    System.out.println(decouvert + " : " + titulaire);
+			    //System.out.println(decouvert + " : " + titulaire);
+			    result = (result + "\n" + decouvert + titulaire);
+			}
+		}
+			catch (SQLException e)
+			{
+			// TODO Auto-generated catch block
+			System.out.println("PROBLEME SELECT " + e.getMessage());
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public String afficheConsulations(int num)
+	{
+		double numero;
+		String typeOp;
+		double montant;
+		Date date;
+		String result = "";
+		/* Exécution d'une requête de lecture */
+		try
+		{
+			ResultSet resultat = statement.executeQuery( "SELECT NUMERO, TYPEOPERATION, MONTANT, DATE  FROM consultations WHERE NUMERO_COMPTE = " + num +";" );
+
+			/* Récupération des données du résultat de la requête de lecture */
+			while ( resultat.next() )
+			{
+				numero = resultat.getInt( "NUMERO" );
+				typeOp = resultat.getString( "TYPEOPERATION" );
+				montant = resultat.getDouble( "MONTANT" );
+				date = resultat.getDate( "DATE" );
+			    /* Traiter ici les valeurs récupérées. */
+			    //System.out.println(decouvert + " : " + titulaire);
+				result = result + "\n" + (String.valueOf(numero) + "   " + typeOp + "   " + String.valueOf(montant) + "   " + String.valueOf(date));
 			}
 		}
 			catch (SQLException e)
@@ -348,5 +388,6 @@ public class bddConnect
 			e.printStackTrace();
 		}
 		//return decouvert;
+		return result;
 	}
 	}

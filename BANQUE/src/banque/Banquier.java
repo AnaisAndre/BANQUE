@@ -19,6 +19,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 public class Banquier extends JPanel 
@@ -36,14 +38,21 @@ public class Banquier extends JPanel
 	private GridBagConstraints gbc_textFieldDecouvActu;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
+	int numCom = 0;
+	int type = 0;
+	private JTextField textField;
+	private JTextArea textArea;
+	private JTextArea textArea_1;
+	
 	compte monCompte = new compte();
 	compte_epargne monCompteEp = new compte_epargne();
 	compte_courant monCompteCo = new compte_courant();
 	bddConnect base = new bddConnect();
 	
-	int numCom = 0;
-	int type = 0;
-	private JTextField textField;
+	
+	
+	String titEnDecouvert;
+	String titCompteEpAndCo;
 	
 
 	/**
@@ -53,9 +62,9 @@ public class Banquier extends JPanel
 		setBackground(Color.PINK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {150, 150, 0, 150, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		setLayout(gridBagLayout);
 		
 		JLabel lblBanquier = new JLabel("BANQUIER");
@@ -300,7 +309,68 @@ public class Banquier extends JPanel
 		add(textFieldDecouAut, gbc_textField_8);
 		textFieldDecouAut.setColumns(10);
 		
+		JLabel lblClientsDisposantsDun = new JLabel("Clients disposants d'un compte \u00E9pargne et d'un compte courant");
+		GridBagConstraints gbc_lblClientsDisposantsDun = new GridBagConstraints();
+		gbc_lblClientsDisposantsDun.gridwidth = 2;
+		gbc_lblClientsDisposantsDun.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClientsDisposantsDun.gridx = 0;
+		gbc_lblClientsDisposantsDun.gridy = 12;
+		add(lblClientsDisposantsDun, gbc_lblClientsDisposantsDun);
 		
+		JLabel lblClientsEnDcouvert = new JLabel("Clients en d\u00E9couvert");
+		GridBagConstraints gbc_lblClientsEnDcouvert = new GridBagConstraints();
+		gbc_lblClientsEnDcouvert.gridwidth = 2;
+		gbc_lblClientsEnDcouvert.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClientsEnDcouvert.gridx = 3;
+		gbc_lblClientsEnDcouvert.gridy = 12;
+		add(lblClientsEnDcouvert, gbc_lblClientsEnDcouvert);
+		
+		textArea = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 0, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 13;
+		add(textArea, gbc_textArea);
+		textArea.setEditable(false);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 13;
+		add(scrollPane, gbc_scrollPane);
+		
+		textArea_1 = new JTextArea();
+		GridBagConstraints gbc_textArea_1 = new GridBagConstraints();
+		gbc_textArea_1.insets = new Insets(0, 0, 0, 5);
+		gbc_textArea_1.fill = GridBagConstraints.BOTH;
+		gbc_textArea_1.gridx = 4;
+		gbc_textArea_1.gridy = 13;
+		add(textArea_1, gbc_textArea_1);
+		textArea_1.setEditable(false);
+		
+		JScrollPane scrollPane_1 = new JScrollPane(textArea_1);
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 3;
+		gbc_scrollPane_1.gridy = 13;
+		add(scrollPane_1, gbc_scrollPane_1);
+		
+		titEnDecouvert = base.titulaireEnDecouvert();
+		textArea_1.setText(titEnDecouvert);
+		
+		titCompteEpAndCo = base.compteEpAndCo();
+		if (titCompteEpAndCo.equals(""))
+		{
+			textArea.setText("Aucun client ne dispose d'un \n compte épargne et d'un \n compte courant.");
+		}
+		else
+		{
+			textArea.setText(titCompteEpAndCo);
+		}
 		
 		
 		
@@ -406,7 +476,7 @@ public class Banquier extends JPanel
 		
 		GridBagConstraints gbc_btnCrer = new GridBagConstraints();
 		gbc_btnCrer.anchor = GridBagConstraints.WEST;
-		gbc_btnCrer.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCrer.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCrer.gridx = 1;
 		gbc_btnCrer.gridy = 11;
 		add(btnCrer, gbc_btnCrer);
@@ -453,7 +523,6 @@ public class Banquier extends JPanel
 		gbc_btnModifier.gridx = 4;
 		gbc_btnModifier.gridy = 4;
 		add(btnModifier, gbc_btnModifier);
-
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

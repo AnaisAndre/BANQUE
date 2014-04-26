@@ -13,6 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import java.awt.Scrollbar;
+import javax.swing.JScrollBar;
+import java.awt.ScrollPane;
+import javax.swing.JScrollPane;
 
 public class Client extends JPanel
 {
@@ -32,6 +37,7 @@ public class Client extends JPanel
 	int numCom;
 	int type = 0;
 	private JTextField textField_1;
+	private JTextArea textArea;
 	/**
 	 * Create the panel.
 	 */
@@ -40,9 +46,9 @@ public class Client extends JPanel
 		setBackground(Color.PINK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{150, 150, 0, 150, 150, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 165, 25};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0};
 		setLayout(gridBagLayout);
 		
 		JLabel lblClient = new JLabel("CLIENT");
@@ -143,6 +149,7 @@ public class Client extends JPanel
 		gbc_textField_3.gridy = 5;
 		add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
+		textField_3.setEditable(false);
 		
 		JLabel lblTauxDeRmunration = new JLabel("Taux de r\u00E9mun\u00E9ration");
 		GridBagConstraints gbc_lblTauxDeRmunration = new GridBagConstraints();
@@ -160,6 +167,7 @@ public class Client extends JPanel
 		gbc_textField_4.gridy = 6;
 		add(textField_4, gbc_textField_4);
 		textField_4.setColumns(10);
+		textField_4.setEditable(false);
 		
 		JLabel lblNouveauSolde = new JLabel("Nouveau solde");
 		GridBagConstraints gbc_lblNouveauSolde = new GridBagConstraints();
@@ -177,11 +185,12 @@ public class Client extends JPanel
 		gbc_textField_7.gridy = 6;
 		add(textField_7, gbc_textField_7);
 		textField_7.setColumns(10);
+		textField_7.setEditable(false);
 		
 		JLabel lblDcouvertAutoris = new JLabel("D\u00E9couvert autoris\u00E9");
 		GridBagConstraints gbc_lblDcouvertAutoris = new GridBagConstraints();
 		gbc_lblDcouvertAutoris.anchor = GridBagConstraints.EAST;
-		gbc_lblDcouvertAutoris.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDcouvertAutoris.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDcouvertAutoris.gridx = 0;
 		gbc_lblDcouvertAutoris.gridy = 7;
 		add(lblDcouvertAutoris, gbc_lblDcouvertAutoris);
@@ -189,13 +198,32 @@ public class Client extends JPanel
 		textField_5 = new JTextField();
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.anchor = GridBagConstraints.WEST;
-		gbc_textField_5.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_5.gridx = 1;
 		gbc_textField_5.gridy = 7;
 		add(textField_5, gbc_textField_5);
 		textField_5.setColumns(10);
+		textField_5.setEditable(false);
 		
-		JButton btnAfficherLeSolde = new JButton("Afficher le solde");
+		textArea = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 5, 0);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 4;
+		gbc_textArea.gridy = 10;
+		add(textArea, gbc_textArea);
+		textArea.setEditable(false);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 10;
+		add(scrollPane, gbc_scrollPane);
+		
+		JButton btnAfficherLeSolde = new JButton("Connexion au compte");
 		btnAfficherLeSolde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -204,6 +232,8 @@ public class Client extends JPanel
 				textField_4.setText("");
 				textField_5.setText("");
 				textField_7.setText("");
+				textArea.setText("");
+				
 				// Récupération des valeurs des textField
 				String tempo = textField.getText();
 				numCom = Integer.parseInt(tempo);
@@ -211,6 +241,9 @@ public class Client extends JPanel
 				//System.out.println("SOL : " + sol);
 				textField_3.setText(String.valueOf(sol));
 				//System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
+				
+				String consultations = base.afficheConsulations(numCom);
+				textArea.setText(consultations);
 				
 				type = base.recupType(numCom);
 				switch (type)
@@ -261,6 +294,8 @@ public class Client extends JPanel
 					base.deposer(numCom, sommeBis);
 				}
 				
+				sol = base.consulte(numCom);
+				
 				if (textField_2.getText().equals(""))
 				{
 					textField_2.setText("0");
@@ -290,5 +325,21 @@ public class Client extends JPanel
 		gbc_btnEffectuer.gridx = 4;
 		gbc_btnEffectuer.gridy = 5;
 		add(btnEffectuer, gbc_btnEffectuer);
+		
+		JSeparator separator_1 = new JSeparator();
+		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
+		gbc_separator_1.gridwidth = 5;
+		gbc_separator_1.insets = new Insets(0, 0, 5, 0);
+		gbc_separator_1.gridx = 0;
+		gbc_separator_1.gridy = 9;
+		add(separator_1, gbc_separator_1);
+		
+		JLabel lblListeDesOprations = new JLabel("Liste des op\u00E9rations effectu\u00E9es");
+		GridBagConstraints gbc_lblListeDesOprations = new GridBagConstraints();
+		gbc_lblListeDesOprations.anchor = GridBagConstraints.EAST;
+		gbc_lblListeDesOprations.insets = new Insets(0, 0, 5, 5);
+		gbc_lblListeDesOprations.gridx = 0;
+		gbc_lblListeDesOprations.gridy = 10;
+		add(lblListeDesOprations, gbc_lblListeDesOprations);
 	}
 }

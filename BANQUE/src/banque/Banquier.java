@@ -446,11 +446,6 @@ public class Banquier extends JPanel
 					{
 						textFieldNouvTx.setText("Taux invalide");
 					}
-					//verif si le champs est vide
-					else if(valeurTx == 0.0d)
-					{
-						erreurModif();
-					}
 					else
 					{
 						base.mise_a_jour_taux(valeurTx);
@@ -470,10 +465,6 @@ public class Banquier extends JPanel
 					textFieldNouvDe.setText("");
 					double decouvActu = base.recupDecouvert(numCom);
 					textFieldDecouvActu.setText(String.valueOf(decouvActu));
-				}
-				else
-				{
-					erreurModif();
 				}
 			}
 		});

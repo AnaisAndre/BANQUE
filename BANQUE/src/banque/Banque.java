@@ -10,8 +10,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import java.sql.*;
-
 public class Banque
 {
 	private JFrame frame;
@@ -48,7 +46,7 @@ public class Banque
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 670, 570);
+		frame.setBounds(100, 100, 750, 609);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();

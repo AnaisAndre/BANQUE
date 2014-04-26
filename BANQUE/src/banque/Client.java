@@ -9,14 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import java.awt.Scrollbar;
-import javax.swing.JScrollBar;
-import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
 
 public class Client extends JPanel
@@ -305,7 +304,13 @@ public class Client extends JPanel
 				
 				if ((decouvActu + sol) < somme)
 				{
-					textField_2.setText("Decouvert dépassé");
+					// création de la frame d'erreur
+					JFrame frame = null;
+					//fenetre d'erreur
+					JOptionPane.showMessageDialog(frame,
+					    "Opération Impossible : Découvert autorisé dépassé",
+					    "Découvert",
+					    JOptionPane.ERROR_MESSAGE);
 				}
 				else
 				{

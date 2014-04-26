@@ -2,6 +2,9 @@ package banque;
 
 import java.sql.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class bddConnect
 {
 	String url = "jdbc:mysql://localhost:3306/banque?user=root&password=''";
@@ -77,9 +80,13 @@ public class bddConnect
         	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde);
 			int statut = statement.executeUpdate( "INSERT INTO compte (NUMERO, NOMTITULAIRE, SOLDE, TYPE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + ", " + type + ");" );
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("PROBLEME " + e.getMessage());
-			e.printStackTrace();
+			// création de la frame
+			JFrame frame = null;
+			//fenetre d'erreur
+			JOptionPane.showMessageDialog(frame,
+			    "Compte existant",
+			    "Erreur de création",
+			    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	/**
@@ -95,9 +102,13 @@ public class bddConnect
         	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "taux : " + taux);
 			int statut = statement.executeUpdate( "INSERT INTO compte_epargne (NUMERO, NOMTITULAIRE, SOLDE, TYPE, TAUX) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + type + "," + taux +");" );
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("PROBLEME " + e.getMessage());
-			e.printStackTrace();
+			// création de la frame
+			JFrame frame = null;
+			//fenetre d'erreur
+			JOptionPane.showMessageDialog(frame,
+			    "Compte existant",
+			    "Erreur de création",
+			    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	/**
@@ -113,9 +124,13 @@ public class bddConnect
         	//System.out.println("numéro : " + num + " nom : " + nom + " solde : " + solde + "découvert autorisé : " + decouvertAuto);
 			int statut = statement.executeUpdate( "INSERT INTO compte_courant (NUMERO, NOMTITULAIRE, SOLDE, TYPE, DECOUVERTAUTORISE) VALUES (" + num + ", " + "'" + nom + "'" + " ," + solde + "," + type + "," + decouvertAuto + ");" );
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("PROBLEME " + e.getMessage());
-			e.printStackTrace();
+			// création de la frame
+			JFrame frame = null;
+			//fenetre d'erreur
+			JOptionPane.showMessageDialog(frame,
+			    "Compte existant",
+			    "Erreur de création",
+			    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -336,16 +351,16 @@ public class bddConnect
 		/* Exécution d'une requête de lecture */
 		try
 		{
-			ResultSet resultat = statement.executeQuery( "SELECT NOMTITULAIRE, DECOUVERTAUTORISE  FROM compte_courant WHERE DECOUVERTAUTORISE < 0;" );
+			ResultSet resultat = statement.executeQuery( "SELECT NOMTITULAIRE, SOLDE  FROM compte_courant WHERE SOLDE < 0;" );
 
 			/* Récupération des données du résultat de la requête de lecture */
 			while ( resultat.next() )
 			{
-			    decouvert = resultat.getDouble( "DECOUVERTAUTORISE" );
+			    decouvert = resultat.getDouble( "SOLDE" );
 			    titulaire = resultat.getString( "NOMTITULAIRE" );
 			    /* Traiter ici les valeurs récupérées. */
 			    //System.out.println(decouvert + " : " + titulaire);
-			    result = (result + "\n" + decouvert + titulaire);
+			    result = (result + "\n" + decouvert+" " + titulaire);
 			}
 		}
 			catch (SQLException e)

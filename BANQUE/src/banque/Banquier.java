@@ -1,21 +1,21 @@
 package banque;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -446,6 +446,11 @@ public class Banquier extends JPanel
 					{
 						textFieldNouvTx.setText("Taux invalide");
 					}
+					//verif si le champs est vide
+					else if(valeurTx == 0.0d)
+					{
+						erreurModif();
+					}
 					else
 					{
 						base.mise_a_jour_taux(valeurTx);
@@ -454,6 +459,7 @@ public class Banquier extends JPanel
 					//monCompteEp.mise_a_jour(valeurTx);
 					double tauxActu = base.recupTaux(numCom);
 					textFieldTauxActu.setText(String.valueOf(tauxActu));
+					System.out.println(valeurTx);
 				}
 				
 				else if (type == 3)
@@ -464,6 +470,10 @@ public class Banquier extends JPanel
 					textFieldNouvDe.setText("");
 					double decouvActu = base.recupDecouvert(numCom);
 					textFieldDecouvActu.setText(String.valueOf(decouvActu));
+				}
+				else
+				{
+					erreurModif();
 				}
 			}
 		});
@@ -497,19 +507,33 @@ public class Banquier extends JPanel
 					textFieldTauxActu.setText("");
 					textFieldDecouvActu.setText("");
 					textField.setText("Classique");
+					textField.setEditable(false);
+					textFieldDecouvActu.setEditable(false);
+					textFieldNouvDe.setEditable(false);
+					textFieldTauxActu.setEditable(false);
+					textFieldNouvTx.setEditable(false);
 					break;
 				case 2 :
 					textFieldDecouvActu.setText("");
 					textField.setText("Epargne");
 					double tauxActu = base.recupTaux(numCom);
 					textFieldTauxActu.setText(String.valueOf(tauxActu));
+					textFieldNouvTx.setEditable(true);
+					textFieldTauxActu.setEditable(false);
+					textFieldDecouvActu.setEditable(false);
+					textField.setEditable(false);
+					textFieldNouvDe.setEditable(false);
 					break;
 				case 3 :
 					textFieldTauxActu.setText("");
 					textField.setText("Courant");
 					double decouvActu = base.recupDecouvert(numCom);
 					textFieldDecouvActu.setText(String.valueOf(decouvActu));
-					
+					textField.setEditable(false);
+					textFieldDecouvActu.setEditable(false);
+					textFieldNouvDe.setEditable(true);
+					textFieldTauxActu.setEditable(false);
+					textFieldNouvTx.setEditable(false);
 					break;
 				default:
 					textField.setText("ERREUR");
@@ -523,23 +547,17 @@ public class Banquier extends JPanel
 		gbc_btnModifier.gridx = 4;
 		gbc_btnModifier.gridy = 4;
 		add(btnModifier, gbc_btnModifier);
+		
 	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+	//affichage de la fenetre d'erreur lors d'une modification
+	public void erreurModif()
+	{
+		// création de la frame
+		JFrame frame = null;
+		//fenetre d'erreur
+		JOptionPane.showMessageDialog(frame,
+		    "Mauvaise modification du taux",	
+		    "Modification Impossible",
+		    JOptionPane.ERROR_MESSAGE);
 	}
 }

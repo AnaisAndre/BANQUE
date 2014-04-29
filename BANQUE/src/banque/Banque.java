@@ -24,9 +24,6 @@ public class Banque
 	 */
 	public static void main(String[] args) 
 	{
-		bddConnect base = new bddConnect();
-		base.compteEpAndCo();
-		//base.titulaireEnDecouvert();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

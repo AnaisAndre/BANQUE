@@ -42,11 +42,8 @@ public class Banquier extends JPanel
 	private JTextField textField;
 	private JTextArea textArea;
 	private JTextArea textArea_1;
-	
 
 	bddConnect base = new bddConnect();
-	
-	
 	
 	String titEnDecouvert;
 	String titCompteEpAndCo;
@@ -55,7 +52,8 @@ public class Banquier extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public Banquier() {
+	public Banquier()
+	{
 		setBackground(Color.PINK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {150, 150, 0, 150, 0, 0};
@@ -72,6 +70,8 @@ public class Banquier extends JPanel
 		gbc_lblBanquier.gridy = 0;
 		add(lblBanquier, gbc_lblBanquier);
 		
+		
+		
 		JSeparator separator = new JSeparator();
 		GridBagConstraints gbc_separator = new GridBagConstraints();
 		gbc_separator.insets = new Insets(0, 0, 5, 5);
@@ -79,6 +79,8 @@ public class Banquier extends JPanel
 		gbc_separator.gridy = 1;
 		add(separator, gbc_separator);
 		
+		
+		// Un label CREER UN COMPTE
 		JLabel lblCrerUnCompte = new JLabel("Cr\u00E9er un compte");
 		lblCrerUnCompte.setFont(new Font("Georgia", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblCrerUnCompte = new GridBagConstraints();
@@ -87,15 +89,8 @@ public class Banquier extends JPanel
 		gbc_lblCrerUnCompte.gridy = 2;
 		add(lblCrerUnCompte, gbc_lblCrerUnCompte);
 		
-		JLabel lblModifierLeTaux = new JLabel("Manipuler un compte");
-		lblModifierLeTaux.setFont(new Font("Georgia", Font.PLAIN, 14));
-		GridBagConstraints gbc_lblModifierLeTaux = new GridBagConstraints();
-		gbc_lblModifierLeTaux.anchor = GridBagConstraints.EAST;
-		gbc_lblModifierLeTaux.insets = new Insets(0, 0, 5, 5);
-		gbc_lblModifierLeTaux.gridx = 3;
-		gbc_lblModifierLeTaux.gridy = 2;
-		add(lblModifierLeTaux, gbc_lblModifierLeTaux);
 		
+		// Un label
 		JLabel lblNom = new JLabel("NOM ");
 		GridBagConstraints gbc_lblNom = new GridBagConstraints();
 		gbc_lblNom.anchor = GridBagConstraints.EAST;
@@ -104,6 +99,7 @@ public class Banquier extends JPanel
 		gbc_lblNom.gridy = 3;
 		add(lblNom, gbc_lblNom);
 		
+		// textField récupérant le nom pour la création du compte
 		textFieldNom = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.anchor = GridBagConstraints.WEST;
@@ -113,24 +109,8 @@ public class Banquier extends JPanel
 		add(textFieldNom, gbc_textField);
 		textFieldNom.setColumns(10);
 		
-		JLabel lblNDuCompte = new JLabel("N\u00B0 du compte");
-		GridBagConstraints gbc_lblNDuCompte = new GridBagConstraints();
-		gbc_lblNDuCompte.anchor = GridBagConstraints.EAST;
-		gbc_lblNDuCompte.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNDuCompte.gridx = 3;
-		gbc_lblNDuCompte.gridy = 3;
-		add(lblNDuCompte, gbc_lblNDuCompte);
 		
-		textFieldNum2 = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.gridwidth = 2;
-		gbc_textField_4.anchor = GridBagConstraints.WEST;
-		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_4.gridx = 4;
-		gbc_textField_4.gridy = 3;
-		add(textFieldNum2, gbc_textField_4);
-		textFieldNum2.setColumns(10);
-		
+		// Un label
 		JLabel lblNumroDeCompte = new JLabel("Num\u00E9ro de compte");
 		GridBagConstraints gbc_lblNumroDeCompte = new GridBagConstraints();
 		gbc_lblNumroDeCompte.anchor = GridBagConstraints.EAST;
@@ -139,6 +119,7 @@ public class Banquier extends JPanel
 		gbc_lblNumroDeCompte.gridy = 4;
 		add(lblNumroDeCompte, gbc_lblNumroDeCompte);
 		
+		// textField récupérant le numéro de compte pour la CREATION du compte
 		textFieldNum1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.anchor = GridBagConstraints.WEST;
@@ -149,7 +130,7 @@ public class Banquier extends JPanel
 		textFieldNum1.setColumns(10);
 		
 		
-		
+		// Un label
 		JLabel lblSoldeInitial = new JLabel("Solde initial");
 		GridBagConstraints gbc_lblSoldeInitial = new GridBagConstraints();
 		gbc_lblSoldeInitial.anchor = GridBagConstraints.EAST;
@@ -158,6 +139,7 @@ public class Banquier extends JPanel
 		gbc_lblSoldeInitial.gridy = 5;
 		add(lblSoldeInitial, gbc_lblSoldeInitial);
 		
+		// textField récupérant le solde pour la création du compte
 		textFieldSoldeI = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.anchor = GridBagConstraints.WEST;
@@ -168,23 +150,8 @@ public class Banquier extends JPanel
 		textFieldSoldeI.setColumns(10);
 		GridBagConstraints gbc_textField3;
 		
-		JLabel lblTypeDeCompte = new JLabel("Type de compte");
-		GridBagConstraints gbc_lblTypeDeCompte = new GridBagConstraints();
-		gbc_lblTypeDeCompte.anchor = GridBagConstraints.EAST;
-		gbc_lblTypeDeCompte.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTypeDeCompte.gridx = 3;
-		gbc_lblTypeDeCompte.gridy = 5;
-		add(lblTypeDeCompte, gbc_lblTypeDeCompte);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField1 = new GridBagConstraints();
-		gbc_textField1.anchor = GridBagConstraints.WEST;
-		gbc_textField1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField1.gridx = 4;
-		gbc_textField1.gridy = 5;
-		add(textField, gbc_textField1);
-		textField.setColumns(10);
-		
+		// Un label
 		JLabel lblCeCompteEstil = new JLabel("Ce compte est-il :");
 		GridBagConstraints gbc_lblCeCompteEstil = new GridBagConstraints();
 		gbc_lblCeCompteEstil.anchor = GridBagConstraints.EAST;
@@ -193,6 +160,7 @@ public class Banquier extends JPanel
 		gbc_lblCeCompteEstil.gridy = 6;
 		add(lblCeCompteEstil, gbc_lblCeCompteEstil);
 		
+		// Bouton radio du compte COURANT
 		final JRadioButton rdbtnCourant = new JRadioButton("Courant    ");
 		buttonGroup.add(rdbtnCourant);
 		GridBagConstraints gbc_rdbtnCourant = new GridBagConstraints();
@@ -202,23 +170,7 @@ public class Banquier extends JPanel
 		gbc_rdbtnCourant.gridy = 6;
 		add(rdbtnCourant, gbc_rdbtnCourant);
 		
-		JLabel lblTauxActuel = new JLabel("Taux actuel");
-		GridBagConstraints gbc_lblTauxActuel = new GridBagConstraints();
-		gbc_lblTauxActuel.anchor = GridBagConstraints.EAST;
-		gbc_lblTauxActuel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTauxActuel.gridx = 3;
-		gbc_lblTauxActuel.gridy = 6;
-		add(lblTauxActuel, gbc_lblTauxActuel);
-		
-		textFieldTauxActu = new JTextField();
-		gbc_textFieldTauxActu = new GridBagConstraints();
-		gbc_textFieldTauxActu.anchor = GridBagConstraints.WEST;
-		gbc_textFieldTauxActu.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldTauxActu.gridx = 4;
-		gbc_textFieldTauxActu.gridy = 6;
-		add(textFieldTauxActu, gbc_textFieldTauxActu);
-		textFieldTauxActu.setColumns(10);
-
+		// Bouton radio du compte EPARGNE
 		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Epargne   ");
 		buttonGroup.add(rdbtnNewRadioButton);
 		GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
@@ -229,23 +181,7 @@ public class Banquier extends JPanel
 		add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
 		GridBagConstraints gbc_textField_5;
 		
-		JLabel lblNouveauTauxDe = new JLabel("Nouveau taux de r\u00E9mun\u00E9ration");
-		GridBagConstraints gbc_lblNouveauTauxDe = new GridBagConstraints();
-		gbc_lblNouveauTauxDe.anchor = GridBagConstraints.EAST;
-		gbc_lblNouveauTauxDe.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNouveauTauxDe.gridx = 3;
-		gbc_lblNouveauTauxDe.gridy = 7;
-		add(lblNouveauTauxDe, gbc_lblNouveauTauxDe);
-		
-		textFieldNouvTx = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.anchor = GridBagConstraints.WEST;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.gridx = 4;
-		gbc_textField_3.gridy = 7;
-		add(textFieldNouvTx, gbc_textField_3);
-		textFieldNouvTx.setColumns(10);
-		
+		// Bouton radio du compte CLASSIQUE
 		final JRadioButton rdbtnClassique = new JRadioButton("Classique");
 		buttonGroup.add(rdbtnClassique);
 		GridBagConstraints gbc_rdbtnClassique = new GridBagConstraints();
@@ -255,40 +191,8 @@ public class Banquier extends JPanel
 		gbc_rdbtnClassique.gridy = 8;
 		add(rdbtnClassique, gbc_rdbtnClassique);
 		
-		JLabel lblDcouvertActuel = new JLabel("D\u00E9couvert actuel");
-		GridBagConstraints gbc_lblDcouvertActuel = new GridBagConstraints();
-		gbc_lblDcouvertActuel.anchor = GridBagConstraints.EAST;
-		gbc_lblDcouvertActuel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDcouvertActuel.gridx = 3;
-		gbc_lblDcouvertActuel.gridy = 8;
-		add(lblDcouvertActuel, gbc_lblDcouvertActuel);
 		
-		textFieldDecouvActu = new JTextField();
-		gbc_textFieldDecouvActu = new GridBagConstraints();
-		gbc_textFieldDecouvActu.anchor = GridBagConstraints.WEST;
-		gbc_textFieldDecouvActu.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldDecouvActu.gridx = 4;
-		gbc_textFieldDecouvActu.gridy = 8;
-		add(textFieldDecouvActu, gbc_textFieldDecouvActu);
-		textFieldDecouvActu.setColumns(10);
-		
-		JLabel lblNouveauDcouvert = new JLabel("Nouveau d\u00E9couvert");
-		GridBagConstraints gbc_lblNouveauDcouvert = new GridBagConstraints();
-		gbc_lblNouveauDcouvert.anchor = GridBagConstraints.EAST;
-		gbc_lblNouveauDcouvert.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNouveauDcouvert.gridx = 3;
-		gbc_lblNouveauDcouvert.gridy = 9;
-		add(lblNouveauDcouvert, gbc_lblNouveauDcouvert);
-		
-		textFieldNouvDe = new JTextField();
-		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-		gbc_textField_6.anchor = GridBagConstraints.WEST;
-		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_6.gridx = 4;
-		gbc_textField_6.gridy = 9;
-		add(textFieldNouvDe, gbc_textField_6);
-		textFieldNouvDe.setColumns(10);
-		
+		// Un label
 		JLabel lblDcouvertAutoris = new JLabel("D\u00E9couvert autoris\u00E9");
 		GridBagConstraints gbc_lblDcouvertAutoris = new GridBagConstraints();
 		gbc_lblDcouvertAutoris.anchor = GridBagConstraints.EAST;
@@ -297,6 +201,7 @@ public class Banquier extends JPanel
 		gbc_lblDcouvertAutoris.gridy = 10;
 		add(lblDcouvertAutoris, gbc_lblDcouvertAutoris);
 		
+		// textField permettant de définir le découvert autorisé lors de la création du compte courant
 		textFieldDecouAut = new JTextField();
 		GridBagConstraints gbc_textField_8 = new GridBagConstraints();
 		gbc_textField_8.anchor = GridBagConstraints.WEST;
@@ -306,6 +211,143 @@ public class Banquier extends JPanel
 		add(textFieldDecouAut, gbc_textField_8);
 		textFieldDecouAut.setColumns(10);
 		
+		
+		
+		// Un label MANIPULER UN COMPTE
+		JLabel lblModifierLeTaux = new JLabel("Manipuler un compte");
+		lblModifierLeTaux.setFont(new Font("Georgia", Font.PLAIN, 14));
+		GridBagConstraints gbc_lblModifierLeTaux = new GridBagConstraints();
+		gbc_lblModifierLeTaux.anchor = GridBagConstraints.EAST;
+		gbc_lblModifierLeTaux.insets = new Insets(0, 0, 5, 5);
+		gbc_lblModifierLeTaux.gridx = 3;
+		gbc_lblModifierLeTaux.gridy = 2;
+		add(lblModifierLeTaux, gbc_lblModifierLeTaux);
+		
+		
+		// Un label
+		JLabel lblNDuCompte = new JLabel("N\u00B0 du compte");
+		GridBagConstraints gbc_lblNDuCompte = new GridBagConstraints();
+		gbc_lblNDuCompte.anchor = GridBagConstraints.EAST;
+		gbc_lblNDuCompte.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNDuCompte.gridx = 3;
+		gbc_lblNDuCompte.gridy = 3;
+		add(lblNDuCompte, gbc_lblNDuCompte);
+		
+		// textField récupérant le numéro de compte pour MANIPULER le compte
+		textFieldNum2 = new JTextField();
+		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
+		gbc_textField_4.gridwidth = 2;
+		gbc_textField_4.anchor = GridBagConstraints.WEST;
+		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_4.gridx = 4;
+		gbc_textField_4.gridy = 3;
+		add(textFieldNum2, gbc_textField_4);
+		textFieldNum2.setColumns(10);
+		
+		
+		// Un label
+		JLabel lblTypeDeCompte = new JLabel("Type de compte");
+		GridBagConstraints gbc_lblTypeDeCompte = new GridBagConstraints();
+		gbc_lblTypeDeCompte.anchor = GridBagConstraints.EAST;
+		gbc_lblTypeDeCompte.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTypeDeCompte.gridx = 3;
+		gbc_lblTypeDeCompte.gridy = 5;
+		add(lblTypeDeCompte, gbc_lblTypeDeCompte);
+		
+		// textField permettant l'affichage du type de compte pour la manipulation du compte.
+		// Ce champ se remplit seul, pas de modif de la part du banquier.
+		textField = new JTextField();
+		GridBagConstraints gbc_textField1 = new GridBagConstraints();
+		gbc_textField1.anchor = GridBagConstraints.WEST;
+		gbc_textField1.insets = new Insets(0, 0, 5, 5);
+		gbc_textField1.gridx = 4;
+		gbc_textField1.gridy = 5;
+		add(textField, gbc_textField1);
+		textField.setColumns(10);
+		
+		
+		// Un label
+		JLabel lblTauxActuel = new JLabel("Taux actuel");
+		GridBagConstraints gbc_lblTauxActuel = new GridBagConstraints();
+		gbc_lblTauxActuel.anchor = GridBagConstraints.EAST;
+		gbc_lblTauxActuel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTauxActuel.gridx = 3;
+		gbc_lblTauxActuel.gridy = 6;
+		add(lblTauxActuel, gbc_lblTauxActuel);
+		
+		// textField permettant d'afficher le taux du compte en cours de manipulation
+		textFieldTauxActu = new JTextField();
+		gbc_textFieldTauxActu = new GridBagConstraints();
+		gbc_textFieldTauxActu.anchor = GridBagConstraints.WEST;
+		gbc_textFieldTauxActu.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldTauxActu.gridx = 4;
+		gbc_textFieldTauxActu.gridy = 6;
+		add(textFieldTauxActu, gbc_textFieldTauxActu);
+		textFieldTauxActu.setColumns(10);
+
+		
+		// Un label
+		JLabel lblNouveauTauxDe = new JLabel("Nouveau taux de r\u00E9mun\u00E9ration");
+		GridBagConstraints gbc_lblNouveauTauxDe = new GridBagConstraints();
+		gbc_lblNouveauTauxDe.anchor = GridBagConstraints.EAST;
+		gbc_lblNouveauTauxDe.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNouveauTauxDe.gridx = 3;
+		gbc_lblNouveauTauxDe.gridy = 7;
+		add(lblNouveauTauxDe, gbc_lblNouveauTauxDe);
+		
+		// textField permettant de définir le nouveau taux lors de la manipulation d'un compte
+		textFieldNouvTx = new JTextField();
+		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+		gbc_textField_3.anchor = GridBagConstraints.WEST;
+		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_3.gridx = 4;
+		gbc_textField_3.gridy = 7;
+		add(textFieldNouvTx, gbc_textField_3);
+		textFieldNouvTx.setColumns(10);
+		
+		
+		// Un label
+		JLabel lblDcouvertActuel = new JLabel("D\u00E9couvert actuel");
+		GridBagConstraints gbc_lblDcouvertActuel = new GridBagConstraints();
+		gbc_lblDcouvertActuel.anchor = GridBagConstraints.EAST;
+		gbc_lblDcouvertActuel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDcouvertActuel.gridx = 3;
+		gbc_lblDcouvertActuel.gridy = 8;
+		add(lblDcouvertActuel, gbc_lblDcouvertActuel);
+		
+		// textField permettant d'afficher le découvert autorisé du compte en cours de manipulation
+		textFieldDecouvActu = new JTextField();
+		gbc_textFieldDecouvActu = new GridBagConstraints();
+		gbc_textFieldDecouvActu.anchor = GridBagConstraints.WEST;
+		gbc_textFieldDecouvActu.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDecouvActu.gridx = 4;
+		gbc_textFieldDecouvActu.gridy = 8;
+		add(textFieldDecouvActu, gbc_textFieldDecouvActu);
+		textFieldDecouvActu.setColumns(10);
+		
+		
+		// Un label
+		JLabel lblNouveauDcouvert = new JLabel("Nouveau d\u00E9couvert");
+		GridBagConstraints gbc_lblNouveauDcouvert = new GridBagConstraints();
+		gbc_lblNouveauDcouvert.anchor = GridBagConstraints.EAST;
+		gbc_lblNouveauDcouvert.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNouveauDcouvert.gridx = 3;
+		gbc_lblNouveauDcouvert.gridy = 9;
+		add(lblNouveauDcouvert, gbc_lblNouveauDcouvert);
+		
+		// textField permettant de récupérer le nouveau découvert défini lors de la manipulation du compte
+		textFieldNouvDe = new JTextField();
+		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
+		gbc_textField_6.anchor = GridBagConstraints.WEST;
+		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_6.gridx = 4;
+		gbc_textField_6.gridy = 9;
+		add(textFieldNouvDe, gbc_textField_6);
+		textFieldNouvDe.setColumns(10);
+		
+		
+		
+		// Un label TITULAIRES D'UN COMPTE EPARGNE ET D'UN COMPTE COURANT
 		JLabel lblClientsDisposantsDun = new JLabel("Clients disposants d'un compte \u00E9pargne et d'un compte courant");
 		GridBagConstraints gbc_lblClientsDisposantsDun = new GridBagConstraints();
 		gbc_lblClientsDisposantsDun.gridwidth = 2;
@@ -314,14 +356,7 @@ public class Banquier extends JPanel
 		gbc_lblClientsDisposantsDun.gridy = 12;
 		add(lblClientsDisposantsDun, gbc_lblClientsDisposantsDun);
 		
-		JLabel lblClientsEnDcouvert = new JLabel("Clients en d\u00E9couvert");
-		GridBagConstraints gbc_lblClientsEnDcouvert = new GridBagConstraints();
-		gbc_lblClientsEnDcouvert.gridwidth = 2;
-		gbc_lblClientsEnDcouvert.insets = new Insets(0, 0, 5, 5);
-		gbc_lblClientsEnDcouvert.gridx = 3;
-		gbc_lblClientsEnDcouvert.gridy = 12;
-		add(lblClientsEnDcouvert, gbc_lblClientsEnDcouvert);
-		
+		// textArea permettant l'affichage des titulaires possédants un compte épargne ET un compte courant
 		textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.insets = new Insets(0, 0, 0, 5);
@@ -331,6 +366,7 @@ public class Banquier extends JPanel
 		add(textArea, gbc_textArea);
 		textArea.setEditable(false);
 		
+		// Permet le défilement du textArea --> Titulaire compte épargne + compte courant
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
@@ -339,6 +375,17 @@ public class Banquier extends JPanel
 		gbc_scrollPane.gridy = 13;
 		add(scrollPane, gbc_scrollPane);
 		
+		
+		// Un label TITULAIRES EN DECOUVERT
+		JLabel lblClientsEnDcouvert = new JLabel("Clients en d\u00E9couvert");
+		GridBagConstraints gbc_lblClientsEnDcouvert = new GridBagConstraints();
+		gbc_lblClientsEnDcouvert.gridwidth = 2;
+		gbc_lblClientsEnDcouvert.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClientsEnDcouvert.gridx = 3;
+		gbc_lblClientsEnDcouvert.gridy = 12;
+		add(lblClientsEnDcouvert, gbc_lblClientsEnDcouvert);
+		
+		// textArea permettant l'affichage des titulaires en découvert
 		textArea_1 = new JTextArea();
 		GridBagConstraints gbc_textArea_1 = new GridBagConstraints();
 		gbc_textArea_1.insets = new Insets(0, 0, 0, 5);
@@ -348,6 +395,7 @@ public class Banquier extends JPanel
 		add(textArea_1, gbc_textArea_1);
 		textArea_1.setEditable(false);
 		
+		// Permet le défilement du textArea_1 --> Titulaires en découvert
 		JScrollPane scrollPane_1 = new JScrollPane(textArea_1);
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.insets = new Insets(0, 0, 0, 5);
@@ -356,70 +404,63 @@ public class Banquier extends JPanel
 		gbc_scrollPane_1.gridy = 13;
 		add(scrollPane_1, gbc_scrollPane_1);
 		
-		titEnDecouvert = base.titulaireEnDecouvert();
-		textArea_1.setText(titEnDecouvert);
-		
-		titCompteEpAndCo = base.compteEpAndCo();
-		if (titCompteEpAndCo.equals(""))
-		{
-			textArea.setText("Aucun client ne dispose d'un \n compte épargne et d'un \n compte courant.");
-		}
-		else
-		{
-			textArea.setText(titCompteEpAndCo);
-		}
 		
 		
+		
+		// CREATION COMPTE
 		JButton btnCrer = new JButton("Cr\u00E9er");
 		btnCrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				// Récupération des valeurs des textField
 				String name = textFieldNom.getText();
-				//System.out.println("JE SUIS LE NAME : " + name);
 				
-				String tempo = textFieldNum1.getText();
-				int numCom = Integer.parseInt(tempo);
-				//System.out.println("JE SUIS LE NUMERO DE COMPTE : " + numCom);
+				String tempo = textFieldNum1.getText(); // Récupération du champ dans une variable temporaire de type String
+				int numCom = Integer.parseInt(tempo);  // Conversion de la variable temporaire en int
 				
 				tempo = textFieldSoldeI.getText();
 				double numSol = Double.parseDouble(tempo);
-				double taux = base.recupTaux(numCom);
-				//System.out.println("JE SUIS LE SOLDE : " + numSol);
 				
+				// Le taux est récupéré dans la base à partir des lignes déjà présentes car il est fixe
+				// Si aucune ligne --> taux = 0.0 %
+				double taux = base.recupTaux(numCom);
+				
+				// Cas bouton radio de compte épargne
 				if (rdbtnNewRadioButton.isSelected())
 				{
-					/*tempo = textFieldTxRem.getText();
-					double tx = Double.parseDouble(tempo);*/
+					// Définition du type
 					type = 2;
-					//monCompteEp = new compte_epargne(numCom, name, numSol, tx);
+					
+					// Insertion dans la table compte ET la table compte_epargne
 					base.insertionCompte(numCom, name, numSol, type);
 					base.insertionCompteEpargne(numCom, name, numSol, type, taux);
-					//monCompteEp.consulte();
-					//System.out.println("VOICI LE TYPE DU COMPTE EP : " + type);
 				}
 				
+				// Cas du bouton radio de compte courant
 				else if (rdbtnCourant.isSelected())
 				{
+					// Récupération du découvert autorisé défini lors de la création
 					tempo = textFieldDecouAut.getText();
 					double decouvert = Double.parseDouble(tempo);
+					
+					// Définition du type
 					type = 3;
-					//compte_courant monCompteCo = new compte_courant(numCom, name, numSol, decouvert);
+
+					// Insertion dans la table compte et compte_courant
 					base.insertionCompte(numCom, name, numSol, type);
 					base.insertionCompteCourant(numCom, name, numSol, type, decouvert);
-					//monCompteCo.consulte();
-					//System.out.println("VOICI LE TYPE DU COMPTE CO : " + type);
 				}
 				
-				else
+				else // Ici, le cas d'un compte classique
 				{
-					//compte monCompte = new compte(numCom,name,numSol);
+					//Définition du type
 					type = 1;
+
+					// Insertion dans la table compte UNIQUEMENT
 					base.insertionCompte(numCom, name, numSol, type);
-					//monCompte.consulte();
 				}
 				
-				// Remise à zéro des textField.
+				// Remise à zéro des textField et boutons radio.
 				textFieldNom.setText("");
 				textFieldNum1.setText("");
 				textFieldSoldeI.setText("");
@@ -427,48 +468,6 @@ public class Banquier extends JPanel
 				buttonGroup.clearSelection();
 			}
 		});
-		
-		JButton btnModifier_1 = new JButton("Modifier");
-		btnModifier_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if (type == 2)
-				{
-					String tempo = textFieldNouvTx.getText();
-					double valeurTx = Double.parseDouble(tempo);
-					if (valeurTx <0)
-					{
-						textFieldNouvTx.setText("Taux invalide");
-					}
-					else
-					{
-						base.mise_a_jour_taux(valeurTx);
-						textFieldNouvTx.setText("");
-					}
-					//monCompteEp.mise_a_jour(valeurTx);
-					double tauxActu = base.recupTaux(numCom);
-					textFieldTauxActu.setText(String.valueOf(tauxActu));
-					System.out.println(valeurTx);
-				}
-				
-				else if (type == 3)
-				{
-					String tempo = textFieldNouvDe.getText();
-					double valeurDecouv = Double.parseDouble(tempo);
-					base.mise_a_jour_decouvert(numCom, valeurDecouv);
-					textFieldNouvDe.setText("");
-					double decouvActu = base.recupDecouvert(numCom);
-					textFieldDecouvActu.setText(String.valueOf(decouvActu));
-				}
-			}
-		});
-		GridBagConstraints gbc_btnModifier_1 = new GridBagConstraints();
-		gbc_btnModifier_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnModifier_1.anchor = GridBagConstraints.WEST;
-		gbc_btnModifier_1.gridx = 4;
-		gbc_btnModifier_1.gridy = 10;
-		add(btnModifier_1, gbc_btnModifier_1);
-		
 		GridBagConstraints gbc_btnCrer = new GridBagConstraints();
 		gbc_btnCrer.anchor = GridBagConstraints.WEST;
 		gbc_btnCrer.insets = new Insets(0, 0, 5, 5);
@@ -476,22 +475,29 @@ public class Banquier extends JPanel
 		gbc_btnCrer.gridy = 11;
 		add(btnCrer, gbc_btnCrer);
 		
+		
+		
+		// CONNEXION AU COMPTE
 		JButton btnModifier = new JButton("Connexion au compte");
 		btnModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
+				// Récupération du numéro de compte auquel se connecter
 				String tempo = textFieldNum2.getText();
 				numCom = Integer.parseInt(tempo);
-				//System.out.println("Voici le numéro de compte : " + numCom);
+				
+				// Récupère le type de compte auquel appartient le compte sur lequel on est connecté
 				type = base.recupType(numCom);
 				
-				//System.out.println("VOICI LE TYPE : " + type);
 				switch (type)
 				{
+				// Cas compte classique
 				case 1 :
-					textFieldTauxActu.setText("");
-					textFieldDecouvActu.setText("");
-					textField.setText("Classique");
+					textFieldTauxActu.setText(""); // Mise à zéro du textField taux actuel
+					textFieldDecouvActu.setText(""); // Mise à zéro du textField découvert actuel
+					
+					textField.setText("Classique"); // Affichage du type de compte
+					
 					textField.setEditable(false);
 					textFieldDecouvActu.setEditable(false);
 					textFieldNouvDe.setEditable(false);
@@ -499,10 +505,16 @@ public class Banquier extends JPanel
 					textFieldNouvTx.setEditable(false);
 					break;
 				case 2 :
-					textFieldDecouvActu.setText("");
-					textField.setText("Epargne");
-					double tauxActu = base.recupTaux(numCom);
-					textFieldTauxActu.setText(String.valueOf(tauxActu));
+					// Cas compte épargne
+					textFieldDecouvActu.setText(""); // Mise à zéro du textField découvert actuel
+					
+					textField.setText("Epargne"); // Affichage du type de compte
+					
+					// Récupération du taux des comptes épargnes et affichage
+					double tauxActu = base.recupTaux(numCom); // Appel à la fonction de récupération du taux
+					textFieldTauxActu.setText(String.valueOf(tauxActu)); // Affichage du taux  !!!! setText ne prend que
+																								 // les String !!!!!
+					
 					textFieldNouvTx.setEditable(true);
 					textFieldTauxActu.setEditable(false);
 					textFieldDecouvActu.setEditable(false);
@@ -510,10 +522,15 @@ public class Banquier extends JPanel
 					textFieldNouvDe.setEditable(false);
 					break;
 				case 3 :
-					textFieldTauxActu.setText("");
-					textField.setText("Courant");
-					double decouvActu = base.recupDecouvert(numCom);
-					textFieldDecouvActu.setText(String.valueOf(decouvActu));
+					// Cas compte courant
+					textFieldTauxActu.setText(""); // Mise à zéro du textField du taux actuel
+					
+					textField.setText("Courant"); // Affichage du type de compte
+					
+					// Récupération du découvert autorisé actuel pour le compte en cours
+					double decouvActu = base.recupDecouvert(numCom); // Appel à la fonction de récupération du découvert
+					textFieldDecouvActu.setText(String.valueOf(decouvActu)); // Affichage du découvert actuel
+					
 					textField.setEditable(false);
 					textFieldDecouvActu.setEditable(false);
 					textFieldNouvDe.setEditable(true);
@@ -533,7 +550,82 @@ public class Banquier extends JPanel
 		gbc_btnModifier.gridy = 4;
 		add(btnModifier, gbc_btnModifier);
 		
+		
+		
+		// MODIFICATION D'UN COMPTE APRES CONNEXION
+		JButton btnModifier_1 = new JButton("Modifier");
+		btnModifier_1.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				// Cas d'un compte EPARGNE
+				if (type == 2)
+				{
+					// Récupération du nouveau taux à définir
+					String tempo = textFieldNouvTx.getText();
+					double valeurTx = Double.parseDouble(tempo);
+					
+					// Vérification de la valeur entrée pour le taux
+					if (valeurTx <0)
+					{
+						textFieldNouvTx.setText("Taux invalide");
+					}
+					else
+					{
+						// Fait appelle à la fonction pour mettre à jour le taux + remise à zéro du textField
+						base.mise_a_jour_taux(valeurTx);
+						textFieldNouvTx.setText("");
+					}
+					
+					// Mise à jour du taux actuel après avoir changé la valeur de ce dernier
+					double tauxActu = base.recupTaux(numCom);
+					textFieldTauxActu.setText(String.valueOf(tauxActu));
+				}
+				
+				// Cas d'un compte COURANT
+				else if (type == 3)
+				{
+					// Récupération du nouveau découvert à définir
+					String tempo = textFieldNouvDe.getText();
+					double valeurDecouv = Double.parseDouble(tempo);
+					
+					// Fait appelle à la fonction pour mettre à jour le découvert + remise à zéro du textField
+					base.mise_a_jour_decouvert(numCom, valeurDecouv);
+					textFieldNouvDe.setText("");
+					
+					// Mise à jour du découvert actuel après avoir changé la valeur de ce dernier
+					double decouvActu = base.recupDecouvert(numCom);
+					textFieldDecouvActu.setText(String.valueOf(decouvActu));
+				}
+			}
+		});
+		GridBagConstraints gbc_btnModifier_1 = new GridBagConstraints();
+		gbc_btnModifier_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModifier_1.anchor = GridBagConstraints.WEST;
+		gbc_btnModifier_1.gridx = 4;
+		gbc_btnModifier_1.gridy = 10;
+		add(btnModifier_1, gbc_btnModifier_1);
+		
+		
+		
+		// Recherche des titulaires étant en découvert
+		// et affichage dans un textArea.
+		titEnDecouvert = base.titulaireEnDecouvert();
+		textArea_1.setText(titEnDecouvert);
+		
+		// Recherche des titulaires possédant un compte épargne ET un compte courant
+		// et affichage dans un textArea.
+		titCompteEpAndCo = base.compteEpAndCo();
+		if (titCompteEpAndCo.equals(""))
+		{
+			textArea.setText("Aucun client ne dispose d'un \n compte épargne et d'un \n compte courant.");
+		}
+		else
+		{
+			textArea.setText(titCompteEpAndCo);
+		}
 	}
+	
 	//affichage de la fenetre d'erreur lors d'une modification
 	public void erreurModif()
 	{
